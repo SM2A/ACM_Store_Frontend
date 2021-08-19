@@ -2,9 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
-
+<ul>
+    <li><a href="/">Store</a></li>
+</ul>
+<div class="container" id="data_form">
+    <h2>Login</h2>
+    <form action="/login" method="post">
+        <label>
+            <input name="email" type="email" placeholder="E-Mail :"/>
+        </label><br/>
+        <label>
+            <input name="password" type="password" placeholder="Password :"/>
+        </label><br/>
+        <label>
+            <a href="/fp">Forget Your Password?</a>
+        </label><br/>
+        <button type="submit">Create</button>
+    </form>
+    <span>or </span><a href="/login">Return to Store</a>
+</div>
 </body>
 </html>
