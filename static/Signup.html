@@ -2,9 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Signup</title>
 </head>
 <body>
-
+<ul>
+    <li><a href="/">Store</a></li>
+</ul>
+<div class="container" id="data_form">
+    <h2>Create Account</h2>
+    <form action="/signup" method="post">
+        <label>
+            <input name="firstName" type="text" placeholder="Firstname :"/>
+        </label><br/>
+        <label>
+            <input name="lastName" type="text" placeholder="Lastname :"/>
+        </label><br/>
+        <label>
+            <input name="password" type="password" placeholder="Password :"/>
+        </label><br/>
+        <label>
+            <input name="email" type="email" placeholder="E-Mail :"/>
+        </label><br/>
+        <label>
+            <input name="phoneNumber" type="tel" placeholder="Phone-number :"/>
+        </label><br/>
+        <label>
+            <input name="address" type="text" placeholder="Address :"/>
+        </label><br/>
+        <button type="submit">Create</button>
+    </form>
+    <span>or </span><a href="/login">Return to Store</a>
+</div>
 </body>
 </html>
