@@ -1,0 +1,111 @@
+body {
+    background: white;
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+.navbar {
+    background: #1d284d;
+    color: white;
+    padding: 1em;
+}
+
+.navbar .top-navbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.navbar .right-navbar {
+    margin-right: 10em;
+}
+
+.navbar .right-navbar p {
+    text-align: right;
+    padding-right: 1em;
+}
+
+.navbar .right-navbar form {
+    display: inline;
+}
+
+.navbar .right-navbar form input[type="submit"], .navbar .right-navbar form #search-products {
+    background-color: #070730;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3em;
+    border: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding: .8em 2em;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.navbar .right-navbar form input[type="submit"]:hover, .navbar .right-navbar form #search-products:hover {
+    background: #02021f;
+}
+
+.navbar .logo {
+    text-decoration: none;
+    font-size: 2em;
+    color: white;
+    text-transform: uppercase;
+    font-family: "Copperplate",fantasy;
+    margin-left: 3em;
+    margin-top: 1em;
+}
+
+.navbar .login {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.navbar .login:hover {
+    color: grey;
+}
+
+.navbar .cart {
+    background-color: #070730;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3em;
+    border: none;
+    margin: 1em;
+    padding: .8em 2em;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navbar .cart:hover {
+    background: #02021f;
+}
+
+.navbar nav {
+    margin-top: 3em;
+    display: block;
+}
+
+.navbar nav ul {
+    list-style-type: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.navbar nav li a {
+    color: white;
+    text-decoration: none;
+    padding-left: 3em;
+    padding-bottom: 0;
+    font-size: 1.2em;
+}
+
+.navbar nav li a:hover {
+    font-weight: bold;
+}
+/*# sourceMappingURL=main.css.map */

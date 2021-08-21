@@ -2,47 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
     <title>Login</title>
 </head>
 <body>
-<div class="header">
-    <div>
-        <a href="/" class="logo">Store</a>
-        <div class="header-right">
-            <span>
-                <a href="/login">sign in</a>
-                <span> or </span>
-                <a href="/signup">Create an Account</a>
-            </span>
+<div class="navbar">
+    <div class="container">
+        <div class="top-navbar">
+            <a class="logo" href="#">Digital</a>
+            <div class="right-navbar">
+                <p><a class="login" href="#">Sign in</a> or <a class="login" href="#">Create an Account</a></p>
+                <form action="">
+                    <label for="search-products">
+                        <input type="text" id="search-products" name="search-products"
+                               placeholder="Search all products">
+                    </label>
+                    <input type="submit" class="search-cta" value="Search">
+                </form>
+                <a class="cart" href="#">Cart</a><br>
+            </div>
         </div>
+        <nav>
+            <ul
+                    class="primary-nav">
+                <li><a href="#">Cameras</a></li>
+                <li><a href="#">Cases</a></li>
+                <li><a href="#">Video</a></li>
+                <li><a href="#">Accessorie</a></li>
+                <li><a href="#">Sport Optics</a></li>
+                <li><a href="#">Lifestyle</a></li>
+            </ul>
+        </nav>
     </div>
-    <nav role="navigation" class="nav-bar">
-        <div>
-            <div class="dropdown">
-                <button class="dropbtn">Categories ↓</button>
-                <div class="dropdown-content">
-                    <a href="#">Games</a>
-                    <a href="#">Pants</a>
-                    <a href="#">Shoes</a>
-                    <a href="#">Cloth</a>
-                    <a href="#">Example</a>
-                </div>
-            </div>
-            <div class="dropdown">
-                <button class="dropbtn">Categories ↓</button>
-                <div class="dropdown-content">
-                    <a href="#">Games</a>
-                    <a href="#">Pants</a>
-                    <a href="#">Shoes</a>
-                    <a href="#">Cloth</a>
-                    <a href="#">Example</a>
-                </div>
-            </div>
-        </div>
-    </nav>
 </div>
-
-<div class="container">
+<div class="form-container">
     <h2>LOGIN</h2>
     <form action="/login" method="post">
         <label>
@@ -65,103 +59,21 @@
 
 <style>
 
-    .header {
-        background-color: #182e49;
-        padding: 50px 225px;
-    }
-
-    .header a {
+    .form-container {
         position: absolute;
-        float: left;
-        color: white;
-        text-align: center;
-        padding: 12px;
-        text-decoration: none;
-        font-size: 18px;
-        line-height: 25px;
-        border-radius: 4px;
-        top: 20px;
-    }
-
-    .header span {
-        position: absolute;
-        float: left;
-        color: white;
-        text-align: center;
-        padding: 12px;
-        text-decoration: none;
-        font-size: 18px;
-        line-height: 25px;
-        border-radius: 4px;
-        top: 20px;
-    }
-
-    .header a.logo {
-        position: absolute;
-        font-size: 35px;
-        font-weight: bolder;
-    }
-
-    .nav-bar {
-        position: relative;
-        top: 45px;
-    }
-
-    .header-right {
-        float: right;
-    }
-
-    .dropbtn {
-        background-color: rgba(0, 0, 0, 0);
-        color: white;
-        font-size: 16px;
-        border: none;
-    }
-
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f1f1f1;
-        min-width: 160px;
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-        z-index: 1;
-    }
-
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: inline-block;
-    }
-
-    .dropdown-content a:hover {
-        background-color: #ddd;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: inline-block;
-    }
-
-    .container {
-        position: absolute;
-        top: 40%;
+        top: 50%;
         left: 50%;
         margin-right: -50%;
         transform: translate(-50%, -50%);
         width: 20%;
     }
 
-    .container h2 {
+    .form-container h2 {
         position: relative;
         left: 38%;
     }
 
-    input {
+    .form-container input {
         border: none;
         margin: 7px;
         padding: 10px;
@@ -170,7 +82,7 @@
         box-sizing: border-box;
     }
 
-    .container button {
+    .form-container button {
         position: relative;
         left: 33%;
         margin: 10px;
@@ -184,7 +96,7 @@
         color: white;
     }
 
-    .container button:hover{
+    .form-container button:hover{
         background: #182e49;
     }
 

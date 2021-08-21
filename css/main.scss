@@ -1,0 +1,114 @@
+body {
+  background: white;;
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+.navbar {
+  background: rgb(29, 40, 77);
+  color: white;
+  padding: 1em;
+
+
+  .top-navbar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .right-navbar{
+    margin-right: 10em;
+
+    p{
+      text-align: right;
+      padding-right: 1em;
+    }
+
+    form {
+      display: inline;
+      input[type="submit"],#search-products {
+        background-color: rgb(7, 7, 48);
+        color: white;
+        font-weight: bold;
+        font-size: 1.3em;
+        border: none;
+        margin-left: 0;
+        margin-right: 0;
+        padding: .8em 2em;
+        cursor: pointer;
+        text-decoration: none;
+
+        &:hover {
+          background: rgb(2, 2, 31);
+        }
+      }
+    }
+  }
+
+  .logo{
+    text-decoration: none;
+    font-size: 2em;
+    color:white;
+    text-transform: uppercase;
+    font-family: "Copperplate",fantasy;
+    margin-left: 3em;
+    margin-top: 1em;
+  }
+
+  .login {
+    text-decoration: none;
+    color:white;
+    font-weight: bold;
+
+
+    &:hover{
+      color: grey;
+    }
+  }
+
+
+  .cart {
+    background-color: rgb(7, 7, 48);
+    color:white;
+    font-weight: bold;
+    font-size: 1.3em;
+    border: none;
+    margin: 1em;
+    padding: .8em 2em;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      background: rgb(2, 2, 31);
+    }
+
+
+  }
+
+  nav {
+    margin-top: 3em;
+    display: block;
+
+    ul {
+      list-style-type: none;
+      display: flex;
+    }
+
+    li {
+
+      a {
+        color: white;
+        text-decoration: none;
+        padding-left: 3em;
+        padding-bottom: 0;
+        font-size: 1.2em;
+
+        &:hover {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+
+
+}
