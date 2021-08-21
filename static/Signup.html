@@ -16,56 +16,58 @@
             </span>
         </div>
     </div>
-        <nav role="navigation" class="nav-bar">
-            <div>
-                <div class="dropdown">
-                    <button class="dropbtn">Categories ↓</button>
-                    <div class="dropdown-content">
-                        <a href="#">Games</a>
-                        <a href="#">Pants</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Cloth</a>
-                        <a href="#">Example</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn">Categories ↓</button>
-                    <div class="dropdown-content">
-                        <a href="#">Games</a>
-                        <a href="#">Pants</a>
-                        <a href="#">Shoes</a>
-                        <a href="#">Cloth</a>
-                        <a href="#">Example</a>
-                    </div>
+    <nav role="navigation" class="nav-bar">
+        <div>
+            <div class="dropdown">
+                <button class="dropbtn">Categories ↓</button>
+                <div class="dropdown-content">
+                    <a href="#">Games</a>
+                    <a href="#">Pants</a>
+                    <a href="#">Shoes</a>
+                    <a href="#">Cloth</a>
+                    <a href="#">Example</a>
                 </div>
             </div>
-        </nav>
+            <div class="dropdown">
+                <button class="dropbtn">Categories ↓</button>
+                <div class="dropdown-content">
+                    <a href="#">Games</a>
+                    <a href="#">Pants</a>
+                    <a href="#">Shoes</a>
+                    <a href="#">Cloth</a>
+                    <a href="#">Example</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 </div>
 
 <div class="container">
     <h2>Create Account</h2>
     <form action="/signup" method="post">
         <label>
-            <input name="firstName" type="text" placeholder="Firstname :"/>
+            <input name="firstName" type="text" placeholder="First Name"/>
         </label><br/>
         <label>
-            <input name="lastName" type="text" placeholder="Lastname :"/>
+            <input name="lastName" type="text" placeholder="Last Name"/>
         </label><br/>
         <label>
-            <input name="password" type="password" placeholder="Password :"/>
+            <input name="password" type="password" placeholder="Password"/>
         </label><br/>
         <label>
-            <input name="email" type="email" placeholder="E-Mail :"/>
+            <input name="email" type="email" placeholder="Email"/>
         </label><br/>
         <label>
-            <input name="phoneNumber" type="tel" placeholder="Phone-number :"/>
+            <input name="phoneNumber" type="tel" placeholder="Phone Number"/>
         </label><br/>
         <label>
-            <input name="address" type="text" placeholder="Address :"/>
+            <input name="address" type="text" placeholder="Address"/>
         </label><br/>
-        <button type="submit">Create</button>
+        <button type="submit">CREATE</button>
     </form>
-    <span>or </span><a href="/login">Return to Store</a>
+    <label id="rtn-str">
+        <span>or </span><a href="/login">Return to Store</a>
+    </label>
 </div>
 </body>
 </html>
@@ -109,7 +111,7 @@
         font-weight: bolder;
     }
 
-    .nav-bar{
+    .nav-bar {
         position: relative;
         top: 45px;
     }
@@ -154,12 +156,56 @@
         display: inline-block;
     }
 
-    .container{
+    .container {
         position: absolute;
-        top: 40%;
+        top: 50%;
         left: 50%;
         margin-right: -50%;
         transform: translate(-50%, -50%);
+        width: 20%;
+    }
+
+    .container h2 {
+        position: relative;
+        left: 27%;
+    }
+
+    input {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .container button {
+        position: relative;
+        left: 33%;
+        margin: 10px;
+        background: #4286db;
+        border-radius: 3px;
+        border: none;
+        width: 35%;
+        padding: 10px;
+        text-align: center;
+        font-size: 15px;
+        color: white;
+    }
+
+    #rtn-str{
+        position: relative;
+        left: 30%;
+        margin: 10px;
+    }
+
+    #rtn-str a{
+        color: #4286db;
+        text-decoration: none;
+    }
+
+    #rtn-str span{
+        color: #4a4a4a;
     }
 
 </style>
