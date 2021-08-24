@@ -1,3 +1,4 @@
+/* navigation bar */
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Montserrat:wght@600&family=Rubik&family=Squada+One&display=swap');
 
 body {
@@ -59,7 +60,7 @@ header {
     caret-color: white;
 }
 
-#search-field:focus{
+#search-field:focus {
     outline: none;
 }
 
@@ -109,7 +110,7 @@ nav {
     margin-top: 80px;
 }
 
-.navbar-lists{
+.navbar-lists {
     padding-left: 0;
     padding-bottom: 15px;
     margin: 0;
@@ -124,7 +125,66 @@ nav ul li a {
     text-decoration: none;
 }
 
-nav li{
+nav li {
     display: inline-block;
     margin-right: 26px;
 }
+
+/* navigation bar style ends*/
+
+/* homepage body */
+
+#main-picture {
+    position: absolute;
+    top: 50%;
+    left: 35%;
+    width: 18%;
+    height: 50%;
+}
+
+/* homepage body style ends */
+
+#main-picture {
+    padding-left: -50%;
+}
+
+#gallery-div {
+    padding-top: 35%;
+    padding-left: 15%;
+}
+
+div.gallery {
+    margin: 20px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+/* profile body */
+
+#profile-div {
+    position: relative;
+    left: 41%;
+    margin-top: 5%;
+
+}
+
+#profile-info {
+    text-align: left;
+}
+
+/* profile body style ends*/
