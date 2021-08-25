@@ -129,7 +129,7 @@ body {
 .product .right-col #cart {
   position: absolute;
   background-color: white;
-  background-image: url(cart.png);
+  background-image: url(../img/cart.png);
   border: 3px solid #55bad3;
   color: #55bad3;
   margin-top: 3em;
