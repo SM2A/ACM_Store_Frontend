@@ -1,0 +1,213 @@
+body {
+  background: white;
+  margin: 0;
+  font-family: 'Poppins';
+}
+
+.checked {
+  color: orange;
+}
+
+.navbar {
+  background: #1d284d;
+  color: white;
+  padding: 1em;
+}
+
+.navbar .top-navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.navbar .right-navbar {
+  margin-right: 10em;
+}
+
+.navbar .right-navbar p {
+  text-align: right;
+  padding-right: 1em;
+}
+
+.navbar .right-navbar form {
+  display: inline;
+}
+
+.navbar .right-navbar form input[type="submit"], .navbar .right-navbar form #search-products {
+  background-color: #070730;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  border: none;
+  margin-left: 0;
+  margin-right: 0;
+  padding: .8em 2em;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navbar .right-navbar form input[type="submit"]:hover, .navbar .right-navbar form #search-products:hover {
+  background: #02021f;
+}
+
+.navbar .logo {
+  text-decoration: none;
+  font-size: 2em;
+  color: white;
+  text-transform: uppercase;
+  font-family: "Copperplate",fantasy;
+  margin-left: 3em;
+  margin-top: 1em;
+}
+
+.navbar .login {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.navbar .login:hover {
+  color: grey;
+}
+
+.navbar .cart {
+  background-color: #070730;
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  border: none;
+  margin: 1em;
+  padding: .8em 2em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navbar .cart:hover {
+  background: #02021f;
+}
+
+.navbar nav {
+  margin-top: 3em;
+  display: block;
+}
+
+.navbar nav ul {
+  list-style-type: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.navbar nav li a {
+  color: white;
+  text-decoration: none;
+  padding-left: 3em;
+  padding-bottom: 0;
+  font-size: 1.2em;
+}
+
+.navbar nav li a:hover {
+  font-weight: bold;
+}
+
+.product img {
+  float: left;
+  margin: 2em 4em 5em 18em;
+}
+
+.product .right-col {
+  margin-top: 6em;
+}
+
+.product .right-col h2 {
+  display: inline;
+}
+
+.product .right-col #cart {
+  position: absolute;
+  background-color: white;
+  background-image: url(cart.png);
+  border: 3px solid #55bad3;
+  color: #55bad3;
+  margin-top: 3em;
+  padding: 15px 32px;
+  text-align: left;
+  text-indent: 2.5em;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-position: 13%;
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-origin: border-box;
+}
+
+.product .right-col #buy {
+  position: absolute;
+  background-color: #55bad3;
+  border: none;
+  color: white;
+  margin-top: 6em;
+  padding: 19px 62px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.product .right-col hr {
+  margin-top: 15em;
+  margin-right: 18em;
+  color: #c5c5c5;
+}
+
+.product .right-col .description {
+  margin-top: 2em;
+  margin-right: 18em;
+  margin-left: 43em;
+}
+
+.product .reviews hr {
+  color: #c5c5c5;
+  margin: 3em 18em 3em 18em;
+}
+
+.product .reviews h2 {
+  margin-left: 12em;
+}
+
+.product .reviews #write-review {
+  margin-left: 18em;
+  margin-top: 2em;
+  text-align: left;
+  width: 20%;
+  float: left;
+}
+
+.product .reviews #write-review th, .product .reviews #write-review td {
+  border: 1px solid #c5c5c5;
+  border-collapse: collapse;
+  padding: 15px;
+}
+
+.product .reviews #write-review a {
+  text-decoration: none;
+  color: #55bad3;
+}
+
+.product .reviews #comments {
+  margin-top: 2em;
+  margin-left: 40em;
+  border: none;
+}
+
+.product .reviews #comments th, .product .reviews #comments td {
+  border: none;
+  padding: 15px;
+}
+/*# sourceMappingURL=main.css.map */
