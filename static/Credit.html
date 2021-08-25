@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>Credit</title>
+</head>
+<body>
+<div class="navbar">
+    <div class="container">
+        <div class="top-navbar">
+            <a class="logo" href="#">Digital</a>
+            <div class="right-navbar">
+                <p><a class="login" href="#">Sign in</a> or <a class="login" href="#">Create an Account</a></p>
+                <form action="">
+                    <label for="search-products">
+                        <input type="text" id="search-products" name="search-products"
+                               placeholder="Search all products">
+                    </label>
+                    <input type="submit" class="search-cta" value="Search">
+                </form>
+                <a class="cart" href="#">Cart</a><br>
+            </div>
+        </div>
+        <nav>
+            <ul
+                    class="primary-nav">
+                <li><a href="#">Cameras</a></li>
+                <li><a href="#">Cases</a></li>
+                <li><a href="#">Video</a></li>
+                <li><a href="#">Accessorie</a></li>
+                <li><a href="#">Sport Optics</a></li>
+                <li><a href="#">Lifestyle</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="form-container">
+    <h2>Chage Account</h2>
+    <form action="/addCredit" method="post">
+        <label>
+            <input name="amount" type="number" min="0" step="1" placeholder="Amount"/>
+        </label><br/>
+        <button type="submit">CHARGE</button>
+    </form>
+    <label id="rtn-prf">
+        <span>or </span><a href="/profile">Return to Profile</a>
+    </label>
+</div>
+</body>
+</html>
+
+<style>
+
+    .form-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 20%;
+    }
+
+    .form-container h2 {
+        position: relative;
+        left: 27%;
+    }
+
+    .form-container input {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container button {
+        position: relative;
+        left: 33%;
+        margin: 10px;
+        background: #4286db;
+        border-radius: 3px;
+        border: none;
+        width: 35%;
+        padding: 10px;
+        text-align: center;
+        font-size: 15px;
+        color: white;
+    }
+
+    .form-container button:hover {
+        background: #182e49;
+    }
+
+    #rtn-prf {
+        position: relative;
+        left: 30%;
+        margin: 10px;
+    }
+
+    #rtn-prf a {
+        color: #4286db;
+        text-decoration: none;
+    }
+
+    #rtn-prf span {
+        color: #4a4a4a;
+    }
+
+</style>
