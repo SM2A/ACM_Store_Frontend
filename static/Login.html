@@ -40,10 +40,10 @@
     <h2>LOGIN</h2>
     <form action="/login" method="post">
         <label>
-            <input name="email" type="email" placeholder="Email"/>
+            <input name="email" type="email" placeholder="Email" required/>
         </label><br/>
         <label>
-            <input name="password" type="password" placeholder="Password"/>
+            <input name="password" type="password" placeholder="Password" required/>
         </label><br/>
         <label id="frgt-psw">
             <a href="/forget-password">Forget Your Password?</a>
@@ -80,6 +80,14 @@
         background: #eeeeee;
         width: 100%;
         box-sizing: border-box;
+    }
+
+    .form-container input:valid{
+        background: #e6f0ff;
+    }
+
+    .form-container input:invalid{
+        background: #ffeded;
     }
 
     .form-container button {

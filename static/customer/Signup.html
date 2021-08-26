@@ -40,22 +40,22 @@
     <h2>Create Account</h2>
     <form action="/signup" method="post">
         <label>
-            <input name="firstName" type="text" placeholder="First Name"/>
+            <input name="firstName" type="text" placeholder="First Name" required/>
         </label><br/>
         <label>
-            <input name="lastName" type="text" placeholder="Last Name"/>
+            <input name="lastName" type="text" placeholder="Last Name" required/>
         </label><br/>
         <label>
-            <input name="password" type="password" placeholder="Password"/>
+            <input name="password" type="password" placeholder="Password" required/>
         </label><br/>
         <label>
-            <input name="email" type="email" placeholder="Email"/>
+            <input name="email" type="email" placeholder="Email" required/>
         </label><br/>
         <label>
-            <input name="phoneNumber" type="tel" placeholder="Phone Number"/>
+            <input name="phoneNumber" type="tel" placeholder="Phone Number" required/>
         </label><br/>
         <label>
-            <input name="address" type="text" placeholder="Address"/>
+            <input name="address" type="text" placeholder="Address" required/>
         </label><br/>
         <button type="submit">CREATE</button>
     </form>
@@ -89,6 +89,14 @@
         background: #eeeeee;
         width: 100%;
         box-sizing: border-box;
+    }
+
+    .form-container input:valid{
+        background: #e6f0ff;
+    }
+
+    .form-container input:invalid{
+        background: #ffeded;
     }
 
     .form-container button {

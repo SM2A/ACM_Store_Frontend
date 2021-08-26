@@ -40,7 +40,7 @@
     <h2>Chage Account</h2>
     <form action="/addCredit" method="post">
         <label>
-            <input name="amount" type="number" min="0" step="1" placeholder="Amount"/>
+            <input name="amount" type="number" min="0" step="1" placeholder="Amount" required/>
         </label><br/>
         <button type="submit">CHARGE</button>
     </form>
@@ -74,6 +74,14 @@
         background: #eeeeee;
         width: 100%;
         box-sizing: border-box;
+    }
+
+    .form-container input:valid{
+        background: #e6f0ff;
+    }
+
+    .form-container input:invalid{
+        background: #ffeded;
     }
 
     .form-container button {
