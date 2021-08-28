@@ -6,24 +6,24 @@
     <link rel="stylesheet" href="/css/main.css">
     <title>Signup</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/js/cookie.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
     <script type="text/javascript">
         email = getCookie("email");
         password = getCookie("password");
-        if (((email==="")&&(password!==""))
-            ||((email!=="")&&(password===""))
-            ||((email==="")&&(password===""))){
+        if (((email === "") && (password !== ""))
+            || ((email !== "") && (password === ""))
+            || ((email === "") && (password === ""))) {
             clearCookie();
-        }else {
+        } else {
             $.ajax({
                 url: "http://localhost:8080/valid_login",
                 type: "POST",
                 data: {"email": email, "password": password},
                 success: function (response) {
-                    if (response=="1") {
+                    if (response == "1") {
                         alert("Please logout first");
                         window.location = "/";
-                    } else if (response=="0"){
+                    } else if (response == "0") {
                         clearCookie();
                     }
                 }
@@ -92,11 +92,6 @@
 </html>
 
 <script type="text/javascript">
-
-    function setCooike(name, value) {
-        document.cookie = name + "=" + value + "; path=/";
-    }
-
     $(document).ready(function () {
         $('#signup-form').submit(function (event) {
             event.preventDefault();
@@ -106,8 +101,8 @@
                 data: $(this).serialize(),
                 success: function (response) {
                     json = JSON.parse(response)
-                    setCooike("email",json.email)
-                    setCooike("password",json.password)
+                    setCooike("email", json.email)
+                    setCooike("password", json.password)
                     window.location.href = "/";
                 },
                 error: function (response) {
