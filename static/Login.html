@@ -5,6 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css">
     <title>Login</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/js/cookie.js"></script>
+    <script type="text/javascript">
+        email = getCookie("email");
+        password = getCookie("password");
+        if (((email==="")&&(password!==""))
+          ||((email!=="")&&(password===""))
+          ||((email==="")&&(password===""))){
+            clearCookie();
+        }else {
+            $.ajax({
+                url: "http://localhost:8080/valid_login",
+                type: "POST",
+                data: {"email": email, "password": password},
+                success: function (response) {
+                    if (response=="1") {
+                        alert("Please logout first");
+                        window.location.href = "/";
+                    } else if (response=="0"){
+                        clearCookie();
+                    }
+                }
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="navbar">
@@ -38,7 +63,7 @@
 </div>
 <div class="form-container">
     <h2>LOGIN</h2>
-    <form action="http://localhost:8080/login" method="post">
+    <form action="http://localhost:8080/login" method="post" id="login-form">
         <label>
             <input name="email" type="email" placeholder="Email" required/>
         </label><br/>
@@ -56,6 +81,28 @@
 </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#login-form').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "http://localhost:8080/login",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function (response) {
+                    json = JSON.parse(response)
+                    setCooike("email", json.email)
+                    setCooike("password", json.password)
+                    window.location.href = "/";
+                },
+                error: function (response) {
+                    alert(response)
+                }
+            });
+        })
+    })
+</script>
 
 <style>
 
@@ -82,11 +129,11 @@
         box-sizing: border-box;
     }
 
-    .form-container input:valid{
+    .form-container input:valid {
         background: #e6f0ff;
     }
 
-    .form-container input:invalid{
+    .form-container input:invalid {
         background: #ffeded;
     }
 
@@ -104,11 +151,11 @@
         color: white;
     }
 
-    .form-container button:hover{
+    .form-container button:hover {
         background: #182e49;
     }
 
-    #frgt-psw a{
+    #frgt-psw a {
         position: relative;
         left: 25%;
         margin: 10px;
@@ -116,18 +163,18 @@
         text-decoration: none;
     }
 
-    #rtn-str{
+    #rtn-str {
         position: relative;
         left: 30%;
         margin: 10px;
     }
 
-    #rtn-str a{
+    #rtn-str a {
         color: #4286db;
         text-decoration: none;
     }
 
-    #rtn-str span{
+    #rtn-str span {
         color: #4a4a4a;
     }
 
