@@ -22,7 +22,7 @@
                 success: function (response) {
                     if (response=="1") {
                         alert("Please logout first");
-                        window.location.href = "/";
+                        window.location = "/";
                     } else if (response=="0"){
                         clearCookie();
                     }
