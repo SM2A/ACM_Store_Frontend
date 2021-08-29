@@ -15,52 +15,69 @@
             <input name="title" type="text" placeholder="Title" required/>
         </label><br/>
         <label>
-            <input name="price" type="number" min="0" step="1" placeholder="Price" required/>
+            <input id="form-price" name="price" type="number" min="0" step="1" placeholder="Price" required/>
         </label><br/>
         <label>
             <input name="quantityAvailable" type="number" min="0" step="1" placeholder="Quantity" required/>
         </label><br/>
         <label>
-            <input name="category" type="text" placeholder="Category" required/>
+            <select name="category" id="category">
+                <option disabled hidden selected value="">Category</option>
+            </select>
         </label><br/>
         <label>
-            <select>
-                <option value = "Computer Architecture" selected>Computer Architecture</option>
-                <option value = "Java">Java</option>
-                <option value = "Discrete Mathematics">Discrete Mathematics</option>
-            </select>
-        </label>
-        <label>
-            <textarea name="description" placeholder="Description" required rows="8"></textarea>
+            <textarea name="description" placeholder="Description" rows="8" required></textarea>
         </label><br/>
         <button type="submit">Add</button>
     </form>
     <label id="rtn-str">
-        <span>or </span><a href="/">Return to Admin Page</a>
+        <span>or </span><a href="/static/admin/Admin.html">Return to Admin Page</a>
     </label>
 </div>
 </body>
 </html>
 
 <script type="text/javascript">
+
+    $.ajax({
+        url: "http://localhost:8080/products/category",
+        type: "GET",
+        success: function (response) {
+            select = document.getElementById('category')
+            for (let i = 0; i < response.length; i++) {
+                select.appendChild(new Option(response[i], response[i]))
+            }
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });
+
     $(document).ready(function () {
         $('#product-form').submit(function (event) {
             event.preventDefault();
-            $.ajax({
-                url: "http://localhost:8080/products/add",
-                type: "POST",
-                data: $(this).serialize(),
-                success: function (response) {
-                    alert("Added successfully")
-                    window.location.href = "/static/admin/AddProduct.html";
-                },
-                error: function (response) {
-                    //todo response message
-                    alert(response)
-                }
-            });
-        })
-    })
+            console.log(this)
+            if (document.getElementById('category').value) {
+                $.ajax({
+                    url: "http://localhost:8080/products/add",
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        alert("Added successfully")
+                        window.location = "/static/admin/AddProduct.html";
+                    },
+                    error: function (response) {
+                        //todo response message
+                        alert(response)
+                    }
+                });
+            } else {
+                alert("Please select category")
+            }
+        });
+    });
+
 </script>
 
 <style>
@@ -93,6 +110,23 @@
     }
 
     .form-container input:invalid {
+        background: #ffeded;
+    }
+
+    .form-container select {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container select:valid {
+        background: #e6f0ff;
+    }
+
+    .form-container select:invalid {
         background: #ffeded;
     }
 
