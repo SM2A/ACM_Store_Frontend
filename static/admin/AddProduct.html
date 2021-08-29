@@ -57,7 +57,6 @@
     $(document).ready(function () {
         $('#product-form').submit(function (event) {
             event.preventDefault();
-            console.log(this)
             if (document.getElementById('category').value) {
                 $.ajax({
                     url: "http://localhost:8080/products/add",

@@ -4,9 +4,128 @@
     <meta charset="UTF-8">
     <title>Add Admin</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="module" src="/js/admin.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript" src="/js/admin.js"></script>
 </head>
 <body>
-
+<div class="form-container">
+    <h2>Add Admin</h2>
+    <form action="http://localhost:8080/admin/add" method="post" id="addAdmin-form">
+        <label>
+            <input name="firstName" type="text" placeholder="First Name" required/>
+        </label><br/>
+        <label>
+            <input name="lastName" type="text" placeholder="Last Name" required/>
+        </label><br/>
+        <label>
+            <input name="password" type="password" placeholder="Password" required/>
+        </label><br/>
+        <label>
+            <input name="email" type="email" placeholder="Email" required/>
+        </label><br/>
+        <label>
+            <input name="phoneNumber" type="tel" placeholder="Phone Number" required/>
+        </label><br/>
+        <label>
+            <input name="address" type="text" placeholder="Address" required/>
+        </label><br/>
+        <button type="submit">CREATE</button>
+    </form>
+    <label id="rtn-str">
+        <span>or </span><a href="/static/admin/Admin.html">Return to Admin Page</a>
+    </label>
+</div>
 </body>
 </html>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#addAdmin-form').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "http://localhost:8080/admin/add",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function (response) {
+                    alert("Added successfully")
+                    alert(response)
+                    window.location = "/static/admin/AddAdmin.html";
+                },
+                error: function (response) {
+                    //todo response message
+                    alert(response)
+                }
+            });
+        });
+    });
+
+</script>
+
+<style>
+
+    .form-container {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 20%;
+    }
+
+    .form-container h2 {
+        position: relative;
+        left: 32%;
+    }
+
+    .form-container input {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container input:valid {
+        background: #e6f0ff;
+    }
+
+    .form-container input:invalid {
+        background: #ffeded;
+    }
+
+    .form-container button {
+        position: relative;
+        left: 33%;
+        margin: 10px;
+        background: #4286db;
+        border-radius: 3px;
+        border: none;
+        width: 35%;
+        padding: 10px;
+        text-align: center;
+        font-size: 15px;
+        color: white;
+    }
+
+    .form-container button:hover {
+        background: #182e49;
+    }
+
+    #rtn-str {
+        position: relative;
+        left: 23%;
+        margin: 10px;
+    }
+
+    #rtn-str a {
+        color: #4286db;
+        text-decoration: none;
+    }
+
+    #rtn-str span {
+        color: #4a4a4a;
+    }
+
+</style>
