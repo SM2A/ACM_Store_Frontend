@@ -22,3 +22,7 @@ function clearCookie() {
     setCooike("email","");
     setCooike("password","");
 }
+
+function removeCookie(name) {
+    setCooike(name,"");
+}

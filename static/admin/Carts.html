@@ -13,6 +13,7 @@
                 <th>ID</th>
                 <th>User Id</th>
                 <th>Status</th>
+                <th>Purchase Date</th>
                 <th>Total</th>
             </tr>
         </table>
@@ -20,26 +21,34 @@
 </html>
 
 <script type="text/javascript">
+
     $.ajax({
         url: "http://localhost:8080/carts/all",
         type: "GET",
         success: function (response) {
-            table = document.getElementById('carts')
-            carts = JSON.parse(response)
+            table = document.getElementById('carts');
+            carts = JSON.parse(response);
             for (let i = 0; i < carts.length; i++) {
-                row = table.insertRow()
+                row = table.insertRow();
 
-                cell = row.insertCell()
-                cell.innerHTML = carts[i].id
+                cell = row.insertCell();
+                para = new URLSearchParams();
+                para.append("id",carts[i].id);
+                link = "http://localhost:3000/static/admin/CartItems.html?"+para.toString();
+                text = "<a href='"+link+"'>"+carts[i].id+"</a>";
+                cell.innerHTML = text;
 
-                cell = row.insertCell()
-                cell.innerHTML = carts[i].userID
+                cell = row.insertCell();
+                cell.innerHTML = carts[i].userID;
 
-                cell = row.insertCell()
-                cell.innerHTML = carts[i].status
+                cell = row.insertCell();
+                cell.innerHTML = carts[i].status;
 
-                cell = row.insertCell()
-                cell.innerHTML = carts[i].total
+                cell = row.insertCell();
+                cell.innerHTML = carts[i].purchaseDate;
+
+                cell = row.insertCell();
+                cell.innerHTML = carts[i].total;
             }
         },
         error: function (response) {

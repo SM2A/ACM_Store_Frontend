@@ -3,8 +3,76 @@
     <head>
         <meta charset="UTF-8">
         <title>Items</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="/js/cookie.js"></script>
+        <script type="text/javascript" src="/js/admin.js"></script>
     </head>
     <body>
-
+    <table id="items" class="center">
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+    </table>
     </body>
 </html>
+
+<script type="text/javascript">
+    para = new URLSearchParams(window.location.search);
+    id = para.get("id");
+    get_url = "http://localhost:8080/carts/"+id;
+    $.ajax({
+        url: get_url,
+        type: "GET",
+        success: function (response) {
+            table = document.getElementById('items')
+            items = JSON.parse(response)
+            for (let i = 0; i < items.length; i++) {
+                row = table.insertRow()
+
+                cell = row.insertCell()
+                cell.innerHTML = items[i].id
+
+                cell = row.insertCell()
+                cell.innerHTML = items[i].title
+
+                cell = row.insertCell()
+                cell.innerHTML = items[i].category
+
+                cell = row.insertCell()
+                cell.innerHTML = items[i].price
+
+                cell = row.insertCell()
+                cell.innerHTML = items[i].quantity
+
+                cell = row.insertCell()
+                cell.innerHTML = items[i].total
+            }
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });
+</script>
+
+<style>
+
+    th, td {
+        border: 1px solid black;
+    }
+
+    td{
+        text-align: center;
+    }
+
+    table.center{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+</style>
