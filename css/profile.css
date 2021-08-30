@@ -1,0 +1,62 @@
+#profile-div {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+table {
+    width: 38.5%;
+    margin-left: 30%;
+}
+
+table, th, td {
+    border: 3px solid;
+    border-collapse: collapse;
+    border-color: #262525;
+    font-family: 'Montserrat', sans-serif;
+}
+
+th, td {
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 2%;
+    text-align: left;
+}
+
+th {
+    width: 30%;
+    background-color: rgba(167, 88, 77, 0.76);
+}
+
+td {
+    font-size: 0.9em;
+}
+
+#redirections {
+    margin-bottom: 10%;
+}
+
+#addCredit, #editProfile {
+    padding: 1%;
+    margin-bottom: 2%;
+    background-color: #182e49;
+    color: #f2f2f2;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    transition: 0.6s;
+}
+
+#addCredit {
+    position: absolute;
+    left: 40%;
+}
+
+#editProfile {
+    position: absolute;
+    left: 50%;
+}
+
+#editProfile:hover, #addCredit:hover {
+    background: #0a1829;
+    transition: 0.6s;
+
+}

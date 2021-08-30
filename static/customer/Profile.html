@@ -1,52 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="/css/profile.css">
+        <script type="text/javascript" src="/js/cookie.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="/js/navigationBar.js"></script>
+        <script src="/js/profile.js"></script>
+    </head>
 
-<head>
-  <meta charset="UTF-8">
-  <title>Profile</title>
-  <link rel="stylesheet" href="/css/styles.css?version=51">
-</head>
+    <header>
+        <div id="logo-place">
+            <a id="logo" href="/index.html">digital</a>
+        </div>
 
-<header>
-    <div id="logo-place">
-        <a id="logo" href="#">digital</a>
-    </div>
-    <div>
-        <p id="header-login"><strong><a class="authorization" href="#">Sign in</a></strong>&nbsp or &nbsp<strong><a class="authorization" href="#">Create an Account</a></strong></p>
-        <form action="" target="_self" method="post" id="forms">
-            <input type="text" id="search-field" name="searchedProduct" placeholder="Search all products...">
-            <input type="image" id="glass-pic" src="../../img/magnifying-glass.png" alt="Submit"/>
-            <input type="button" id="cart-field" value="Cart">
-        </form>
-    </div>
+        <div>
+            <p id="default-page-options">
+                <a class="authorization" href="/Static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                    class="authorization" href="/Static/customer/Signup.html">Create an Account</a></p>
+            <p id="loggedIn-page-options">
+                <a class="authorization" href="/Static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                    class="authorization" href="#">Logout</a></p>
+            <form action="" target="_self" method="post" class="forms">
+                <input type="text" id="search-field" name="searchedProduct" placeholder="Search all products...">
+                <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit"/>
+            </form>
+            <form action="" target="_self" method="post" class="forms">
+                <input type="button" id="cart-field" value="Cart">
+            </form>
+        </div>
 
-    <div>
-        <nav>
-            <ul class="navbar-lists">
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">cases</a></li>
-                <li><a href="#">video</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">sport optic</a></li>
-                <li><a href="#">lifestyle</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+        <div>
+            <nav>
+                <ul class="navbar-lists">
+                    <li><a href="#">Cameras</a></li>
+                    <li><a href="#">cases</a></li>
+                    <li><a href="#">video</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">sport optic</a></li>
+                    <li><a href="#">lifestyle</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<body>
+    <body>
     <div id="profile-div">
-        <p id="profile-info">
-            Name:<br>
-            LastName:<br>
-            ID:<br>
-            Email:<br>
-            Phone Number:<br>
-            password:<br>
-            Address:<br>
-            Register Date:<br>
-        </p>
+        <h2>"Your Profile Information"</h2>
+        <table>
+            <tr>
+                <th>Id:</th>
+                <td id="id"></td>
+            </tr>
+            <tr>
+                <th>First Name:</th>
+                <td id="firstName"></td>
+            </tr>
+            <tr>
+                <th>Last Name:</th>
+                <td id="lastName"></td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td id="email"></td>
+            </tr>
+            <tr>
+                <th>Password:</th>
+                <td id="password"></td>
+            </tr>
+            <tr>
+                <th>Phone Number:</th>
+                <td id="phoneNumber"></td>
+            </tr>
+            <tr>
+                <th>Address:</th>
+                <td id="address"></td>
+            </tr>
+            <tr>
+                <th>Credit:</th>
+                <td id="credit"></td>
+            </tr>
+            <tr>
+                <th>Register Date:</th>
+                <td id="registerDate"></td>
+            </tr>
+        </table>
     </div>
-</body>
+
+    <div id="redirections">
+        <br><br>
+        <a id="addCredit" href="Credit.html">Add Credit</a>
+        <a id="editProfile" href="editProfile.html">Edit Profile</a>
+        <!--    //todo edit profile page-->
+    </div>
+
+    </body>
 
 </html>
