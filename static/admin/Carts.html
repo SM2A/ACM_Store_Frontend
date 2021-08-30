@@ -1,13 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Carts</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="/js/cookie.js"></script>
-    <script type="text/javascript" src="/js/admin.js"></script>
-</head>
-<body>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Carts</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="/js/cookie.js"></script>
+        <script type="text/javascript" src="/js/admin.js"></script>
+    </head>
+    <body>
+        <table id="carts" class="center">
+            <tr>
+                <th>ID</th>
+                <th>User Id</th>
+                <th>Status</th>
+                <th>Total</th>
+            </tr>
+        </table>
+    </body>
 </html>
+
+<script type="text/javascript">
+    $.ajax({
+        url: "http://localhost:8080/carts/all",
+        type: "GET",
+        success: function (response) {
+            table = document.getElementById('carts')
+            carts = JSON.parse(response)
+            for (let i = 0; i < carts.length; i++) {
+                row = table.insertRow()
+
+                cell = row.insertCell()
+                cell.innerHTML = carts[i].id
+
+                cell = row.insertCell()
+                cell.innerHTML = carts[i].userID
+
+                cell = row.insertCell()
+                cell.innerHTML = carts[i].status
+
+                cell = row.insertCell()
+                cell.innerHTML = carts[i].total
+            }
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });
+</script>
+
+<style>
+
+    th, td {
+        border: 1px solid black;
+    }
+
+    td{
+        text-align: center;
+    }
+
+    table.center{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+</style>

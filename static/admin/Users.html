@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript" src="/js/cookie.js"></script>
-    <script type="text/javascript" src="/js/admin.js"></script>
-</head>
-<body>
-<table id="users" class="center">
-    <tr>
-        <th>ID</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Phone Number</th>
-        <th>Address</th>
-        <th>Credit</th>
-        <th>Register Date</th>
-    </tr>
-</table>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>User</title>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="/js/cookie.js"></script>
+        <script type="text/javascript" src="/js/admin.js"></script>
+    </head>
+    <body>
+        <table id="users" class="center">
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Credit</th>
+                <th>Register Date</th>
+            </tr>
+        </table>
+    </body>
 </html>
 
 <script type="text/javascript">
@@ -50,13 +50,9 @@
                 cell = row.insertCell()
                 cell.innerHTML = response[i].address
 
-                if (response[i].credit==null) {
-                    cell = row.insertCell()
-                    cell.innerHTML = "+"
-                } else {
-                    cell = row.insertCell()
-                    cell.innerHTML = response[i].credit
-                }
+                cell = row.insertCell()
+                if (response[i].credit==null) {cell.innerHTML = "+"}
+                else {cell.innerHTML = response[i].credit}
 
                 cell = row.insertCell()
                 cell.innerHTML = response[i].registerDate
