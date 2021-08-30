@@ -5,24 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/js/navigationBar.js"></script>
 </head>
 
 <header>
     <div id="logo-place">
-        <a id="logo" href="#">digital</a>
+        <a id="logo" href="/index.html">digital</a>
     </div>
+
     <div>
-        <p id="header-login">
-        <a class="authorization" href="../Static/Login.html">Sign in</a>&nbsp or &nbsp<a class="authorization" href="#">Create an Account</a></p>
+        <p id="default-page-options">
+            <a class="authorization" href="/Static/Login.html">Sign in</a>&nbsp or &nbsp<a
+            class="authorization" href="/Static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/Static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+            class="authorization" href="#">Logout</a></p>
         <form action="" target="_self" method="post" class="forms">
             <input type="text" id="search-field" name="searchedProduct" placeholder="Search all products...">
-            <input type="image" id="glass-pic" src="../img/magnifying-glass.png" alt="Submit"/>
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit"/>
         </form>
         <form action="" target="_self" method="post" class="forms">
             <input type="button" id="cart-field" value="Cart">
         </form>
-
     </div>
 
     <div>
