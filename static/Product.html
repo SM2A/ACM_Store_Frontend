@@ -14,7 +14,7 @@
         name = "";
         comments = [];
         $.ajax({
-            url: "http://localhost:8080/comments/1",
+            url: "http://localhost:8080/comments/" + id,
             type: "GET",
             success: function (response) {
                 comments = response;
@@ -46,7 +46,7 @@
             }
         });
         $.ajax({
-            url: "http://localhost:8080/products/1",
+            url: "http://localhost:8080/products/" + id,
             type: "GET",
             success: function (response) {
                 console.log(response);
