@@ -33,10 +33,11 @@ function haveAccess(id) {
         url: "http://localhost:8080/carts",
         type: "POST",
         data: {"email": email, "password": password},
+        async: false,
         success: function (carts) {
             cart = JSON.parse(carts)
             for (let j = 0; j < cart.length; j++) {
-                if (cart[i].id == id) permission = true;
+                if (cart[j].id == id) permission = true;
             }
         },
         error: function (response) {
@@ -45,4 +46,22 @@ function haveAccess(id) {
         }
     });
     return permission;
+}
+
+function purchase() {
+    let email = getCookie("email");
+    let password = getCookie("password");
+    $.ajax({
+        url: "http://localhost:8080/purchase",
+        type: "POST",
+        data: {"email": email, "password": password},
+        success: function (response) {
+            alert(response);
+            window.location = "/";
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });
 }
