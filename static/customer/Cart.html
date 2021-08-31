@@ -5,6 +5,7 @@
     <title>Cart</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
     <script type="text/javascript">
         email = getCookie("email");
         password = getCookie("password");
@@ -103,40 +104,45 @@
             }
         });
     }else {
-        get_url = "http://localhost:8080/carts/"+id;
-        $.ajax({
-            url: get_url,
-            type: "GET",
-            success: function (response) {
-                table = document.getElementById('items')
-                items = JSON.parse(response)
-                for (let i = 0; i < items.length; i++) {
-                    row = table.insertRow()
+        if (haveAccess(id)) {
+            get_url = "http://localhost:8080/carts/" + id;
+            $.ajax({
+                url: get_url,
+                type: "GET",
+                success: function (response) {
+                    table = document.getElementById('items')
+                    items = JSON.parse(response)
+                    for (let i = 0; i < items.length; i++) {
+                        row = table.insertRow()
 
-                    cell = row.insertCell()
-                    cell.innerHTML = items[i].id
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].id
 
-                    cell = row.insertCell()
-                    cell.innerHTML = items[i].title
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].title
 
-                    cell = row.insertCell()
-                    cell.innerHTML = items[i].category
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].category
 
-                    cell = row.insertCell()
-                    cell.innerHTML = items[i].price
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].price
 
-                    cell = row.insertCell()
-                    cell.innerHTML = items[i].quantity
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].quantity
 
-                    cell = row.insertCell()
-                    cell.innerHTML = items[i].total
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].total
+                    }
+                },
+                error: function (response) {
+                    //todo response message
+                    alert(response)
                 }
-            },
-            error: function (response) {
-                //todo response message
-                alert(response)
-            }
-        });
+            });
+        } else {
+            alert("You don't have permission");
+            window.location = "/static/customer/Cart.html";
+        }
     }
 </script>
 

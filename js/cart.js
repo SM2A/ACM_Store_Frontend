@@ -24,3 +24,25 @@ function goToCart() {
         });
     }
 }
+
+function haveAccess(id) {
+    let email = getCookie("email");
+    let password = getCookie("password");
+    permission = false;
+    $.ajax({
+        url: "http://localhost:8080/carts",
+        type: "POST",
+        data: {"email": email, "password": password},
+        success: function (carts) {
+            cart = JSON.parse(carts)
+            for (let j = 0; j < cart.length; j++) {
+                if (cart[i].id == id) permission = true;
+            }
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });
+    return permission;
+}
