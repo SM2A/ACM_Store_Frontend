@@ -1,75 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Profile</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/product.css">
+    <script type="text/javascript">
+        para = new URLSearchParams(window.location.search);
+        id = para.get("id");
+        name = "";
+        comments = [];
+        $.ajax({
+            url: "http://localhost:8080/comments/" + id,
+            type: "GET",
+            success: function (response) {
+                comments = response;
+                table = document.getElementById('comments')
+                for (let i = 0; i < response.length; i++) {
+                    row = table.insertRow();
+                    cell = row.insertCell();
+                    userID = response[i].userID;
+                    name = "";
+                    // console.log("id: " + userID)
+                    // $.ajax({
+                    //     url: "http://localhost:8080/users/" + userID,
+                    //     type: "GET",
+                    //     success: function (response) {
+                    //         console.log(response);
+                    //         name = response.firstName + response.lastName;
+                    //     },
+                    //     error: function (response) {
+                    //         //alert(response)
+                    //     }
+                    // });
+                    //cell.innerHTML = "<strong>"+ name +"</strong>" + ": <br>" + response[i].text;
+                    cell.innerHTML = "<strong>"+ userID +"</strong>" + ": <br>" + response[i].text;
+                }
+            },
+            error: function (response) {
+                //todo response message
+                alert(response)
+            }
+        });
+        $.ajax({
+            url: "http://localhost:8080/products/" + id,
+            type: "GET",
+            success: function (response) {
+                console.log(response);
+                document.getElementById('title').innerHTML = response.title;
+                document.getElementById('price').innerHTML = '$' + response.price;
+                document.getElementById('rating').innerHTML = "Rating: " + response.rating;
+                document.getElementById('description').innerHTML = response.description;
+                document.getElementById('total-rating').innerHTML = "Rating: " + response.rating + "<br>Based on " + comments.length + " reviews";
+            },
+            error: function (response) {
+                //todo response message
+                alert(response)
+            }
+        });
+    </script>
 </head>
-<body>
 
-<div class="navbar">
-    <div class="container">
-        <div class="top-navbar">
-            <a class="logo" href="#">Digital</a>
-            <div class="right-navbar">
-                <p><a class="login" href="#">Sign in</a> or <a class="login" href="#">Create an Account</a></p>
-                <form action="">
-                    <input type="text" id="search-products" name="search-products" placeholder="Search all products">
-                    <input type="submit" class="search-cta" value="Search">
-                </form>
-                <a class="cart" href="#">Cart</a><br>
-            </div>
-        </div>
+<header>
+    <div id="logo-place">
+        <a id="logo" href="#">digital</a>
+    </div>
+    <div>
+        <p id="header-login"><strong><a class="authorization" href="#">Sign in</a></strong>&nbsp or &nbsp<strong><a class="authorization" href="#">Create an Account</a></strong></p>
+        <form action="" target="_self" method="post" id="forms">
+            <input type="text" id="search-field" name="searchedProduct" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="../../img/magnifying-glass.png" alt="Submit"/>
+            <input type="button" id="cart-field" value="Cart">
+        </form>
+    </div>
+
+    <div>
         <nav>
-            <ul
-                    class="primary-nav">
+            <ul class="navbar-lists">
                 <li><a href="#">Cameras</a></li>
-                <li><a href="#">Cases</a></li>
-                <li><a href="#">Video</a></li>
+                <li><a href="#">cases</a></li>
+                <li><a href="#">video</a></li>
                 <li><a href="#">Accessories</a></li>
-                <li><a href="#">Sport Optics</a></li>
-                <li><a href="#">Lifestyle</a></li>
+                <li><a href="#">sport optic</a></li>
+                <li><a href="#">lifestyle</a></li>
             </ul>
         </nav>
     </div>
-</div>
+</header>
+<body>
+
 <section class="product">
     <div class="info">
         <img src="../img/camera.jpg" alt="camera image">
         <div class="right-col">
-            <h1>LEICA S (TYP 007)</h1>
-            <h2>$16,900<sup>00</sup> &nbsp</h2>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"> 3 reviews</span><br>
+            <h1 id="title"></h1>
+            <h2 id="price"></h2>
+            <h3 id="rating"></h3>
             <input type="button" id="cart" value="ADD TO CART"><br>
             <input type="button" id="buy" value="BUY IT NOW"><br>
             <hr>
-            <div class="description">
-                <ul>
-                    <li><p><strong>New: LEICA S. Live view CMOS, high speed 3.5fps, 4K video recording and optimum image
-                        qualit –
-                        combined with perfect handling</strong><br>
-                        For a complete review of the Leica S (typ 007) with sample images
-                        from NYC and Iceland, check out Red Dot Forum.</p></li>
-                    <li><p>With the Leica S (Type 007), Leica Camera presents the new top model of the Leica S-System.
-                        As a logical development of its predecessors, the new Leica S features a multitude of radically
-                        new components –
-                        like the Leica CMOS sensor and the Leica Maestro II image processor – and now opens up new
-                        dimensions in the field of medium-format photography.
-                        For the first time, the combination of the highest burst rate, extreme sensor sensitivity and
-                        comprehensive capture modes for still pictures –
-                        and now also video in exceptional quality –provides photographers with the opportunity to
-                        exploit the superior imaging capabilities of medium
-                        format for productions that demand maximum mobility and drive. The Leica S significantly
-                        accelerates and simplifies the photographic workflow
-                        with a multitude of features that are unique to medium-format photography – and some of them not
-                        only there.</p></li>
-                </ul>
+            <div id="description">
             </div>
         </div>
         <div class="reviews">
@@ -77,57 +110,18 @@
             <h2>CUSTOMER REVIEWS</h2>
             <table id="write-review">
                 <tr>
-                    <td><span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star"> </span><br>Based on 3 reviews
-                    </td>
+                    <td id="total-rating"></td>
                 </tr>
                 <tr>
                     <td><a href="#">Write a review > </a></td>
                 </tr>
             </table>
-            <div>
-                <table id="comments">
-                    <tr>
-                        <td>
-                            <strong>619</strong> &nbsp<span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"> </span><strong>&nbsp booyaka 619 on Jul 29, 2020</strong><br>
-                            BUYAKA BUYAKA 619 Rey Mysterio
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>2222</strong> &nbsp<span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"> </span><strong>&nbsp awfss on May 14, 2020</strong><br>
-                            WOOOOW 12K
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>WOW GREAT</strong> &nbsp<span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"> </span><strong>&nbsp Dave Vinch on Apr 10, 2020</strong><br>
-                            Great
-                        </td>
-                    </tr>
-                </table>
-                <hr>
-
-            </div>
+            <table id="comments">
+            </table>
         </div>
-
     </div>
 </section>
 
 </body>
 </html>
+
