@@ -5,7 +5,7 @@ if (((email === "") && (password !== ""))
     || ((email !== "") && (password === ""))
     || ((email === "") && (password === ""))) {
     alert("Please login first");
-    window.location.href = "static/Login.html";
+    window.location.href = "/static/Login.html";
     clearCookie();
 } else {
     $.ajax({
