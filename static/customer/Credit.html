@@ -4,6 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/main.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript">
+        email = getCookie("email");
+        password = getCookie("password");
+        if (((email === "") && (password !== ""))
+            || ((email !== "") && (password === ""))
+            || ((email === "") && (password === ""))) {
+            clearCookie();
+        } else {
+            $.ajax({
+                url: "http://localhost:8080/valid_login",
+                type: "POST",
+                data: {"email": email, "password": password},
+                success: function (response) {
+                    if (response == "0") {
+                        alert("Please login first");
+                        window.location = "/static/Login.html";
+                    }
+                }
+            });
+        }
+    </script>
     <title>Credit</title>
 </head>
 <body>
@@ -24,8 +47,7 @@
             </div>
         </div>
         <nav>
-            <ul
-                    class="primary-nav">
+            <ul class="primary-nav">
                 <li><a href="#">Cameras</a></li>
                 <li><a href="#">Cases</a></li>
                 <li><a href="#">Video</a></li>
@@ -38,9 +60,9 @@
 </div>
 <div class="form-container">
     <h2>Chage Account</h2>
-    <form action="/addCredit" method="post">
+    <form id="credit-form" action="http://localhost:8080/credit/add" method="post">
         <label>
-            <input name="amount" type="number" min="0" step="1" placeholder="Amount" required/>
+            <input id="amount" name="amount" type="number" min="0" step="1" placeholder="Amount" required/>
         </label><br/>
         <button type="submit">CHARGE</button>
     </form>
@@ -50,6 +72,27 @@
 </div>
 </body>
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#credit-form').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "http://localhost:8080/credit/add",
+                type: "POST",
+                data: {"email": email, "password": password,"amount":$("#amount").val()},
+                success: function (response) {
+                    alert(response)
+                    window.location.href = "/static/customer/Profile.html";
+                },
+                error: function (response) {
+                    //todo response message
+                    alert(response)
+                }
+            });
+        })
+    })
+</script>
 
 <style>
 
@@ -76,11 +119,11 @@
         box-sizing: border-box;
     }
 
-    .form-container input:valid{
+    .form-container input:valid {
         background: #e6f0ff;
     }
 
-    .form-container input:invalid{
+    .form-container input:invalid {
         background: #ffeded;
     }
 
