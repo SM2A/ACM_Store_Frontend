@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript">
+        email = getCookie("email");
+        password = getCookie("password");
+        if (((email === "") && (password !== ""))
+            || ((email !== "") && (password === ""))
+            || ((email === "") && (password === ""))) {
+            clearCookie();
+        } else {
+            $.ajax({
+                url: "http://localhost:8080/valid_login",
+                type: "POST",
+                data: {"email": email, "password": password},
+                success: function (response) {
+                    if (response == "0") {
+                        alert("Please login first");
+                        window.location = "/static/Login.html";
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<table id="items" class="center">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+</table>
+</body>
+</html>
+
+<script type="text/javascript">
+    $.ajax({
+        url: "http://localhost:8080/carts",
+        type: "POST",
+        data: {"email": email, "password": password},
+        success: function (carts) {
+            openCart = JSON.parse(carts)
+            for (let j = 0; j < openCart.length; j++) {
+                if (openCart[j].status == "OPEN") {
+                    get_url = "http://localhost:8080/carts/"+openCart[j].id;
+                    $.ajax({
+                        url: get_url,
+                        type: "GET",
+                        success: function (response) {
+                            table = document.getElementById('items')
+                            items = JSON.parse(response)
+                            for (let i = 0; i < items.length; i++) {
+                                row = table.insertRow()
+
+                                cell = row.insertCell()
+                                cell.innerHTML = items[i].id
+
+                                cell = row.insertCell()
+                                cell.innerHTML = items[i].title
+
+                                cell = row.insertCell()
+                                cell.innerHTML = items[i].category
+
+                                cell = row.insertCell()
+                                cell.innerHTML = items[i].price
+
+                                cell = row.insertCell()
+                                cell.innerHTML = items[i].quantity
+
+                                cell = row.insertCell()
+                                cell.innerHTML = items[i].total
+                            }
+                            row = table.insertRow()
+                            cell = row.insertCell()
+                            cell.setAttribute("colspan","5")
+                            cell = row.insertCell()
+                            cell.innerHTML = openCart[j].total
+                        },
+                        error: function (response) {
+                            //todo response message
+                            alert(response)
+                        }
+                    });
+                }
+            }
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });
+
+</script>
+
+<style>
+
+    th, td {
+        border-style: groove;
+        border-color: lightskyblue;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    table.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    th {
+        background: #1664bf;
+        color: white;
+    }
+
+    tr:hover {
+        background: #ffadad;
+    }
+
+</style>
