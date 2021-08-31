@@ -2,9 +2,109 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript">
+        email = getCookie("email");
+        password = getCookie("password");
+        if (((email === "") && (password !== ""))
+            || ((email !== "") && (password === ""))
+            || ((email === "") && (password === ""))) {
+            clearCookie();
+            alert("Please login first");
+            window.location = "/static/Login.html";
+        } else {
+            $.ajax({
+                url: "http://localhost:8080/valid_login",
+                type: "POST",
+                data: {"email": email, "password": password},
+                success: function (response) {
+                    if (response == "0") {
+                        alert("Please login first");
+                        window.location = "/static/Login.html";
+                    }
+                }
+            });
+        }
+    </script>
     <title>Previous Purchases</title>
 </head>
 <body>
-
+<table id="carts" class="center">
+    <tr>
+        <th>ID</th>
+        <th>Purchase Date</th>
+        <th>Total</th>
+    </tr>
+</table>
 </body>
 </html>
+
+<script type="text/javascript">
+    $.ajax({
+        url: "http://localhost:8080/carts",
+        type: "POST",
+        data: {"email": email, "password": password},
+        success: function (response) {
+            table = document.getElementById('carts');
+            carts = JSON.parse(response);
+            for (let i = 0; i < carts.length; i++) {
+                if (carts[i].status != "OPEN") {
+                    row = table.insertRow();
+
+                    para = new URLSearchParams();
+                    para.append("id", carts[i].id);
+                    link = "http://localhost:3000/static/customer/Cart.html?" + para.toString();
+                    attribute = "window.location=" + "'" + link + "'";
+                    row.setAttribute("onclick", attribute);
+
+                    cell = row.insertCell();
+                    cell.innerHTML = carts[i].id;
+
+                    cell = row.insertCell();
+                    cell.innerHTML = carts[i].purchaseDate;
+
+                    cell = row.insertCell();
+                    cell.innerHTML = carts[i].total;
+                }
+            }
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });
+</script>
+
+<style>
+
+    th, td {
+        border-style: groove;
+        border-color: lightskyblue;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    tr {
+        cursor: pointer;
+    }
+
+    table.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    th {
+        background: #1664bf;
+        color: white;
+    }
+
+    tr:hover {
+        background: #ffadad;
+    }
+
+</style>
