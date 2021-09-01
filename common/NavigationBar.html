@@ -7,8 +7,9 @@
     <title>HomePage</title>
     <link rel="stylesheet" href="/css/styles.css">
     <script type="text/javascript" src="/js/cookie.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
     <script src="/js/navigationBar.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
 <header>
@@ -18,17 +19,17 @@
 
     <div>
         <p id="default-page-options">
-            <a class="authorization" href="/Static/Login.html">Sign in</a>&nbsp or &nbsp<a
-            class="authorization" href="/Static/customer/Signup.html">Create an Account</a></p>
+            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
         <p id="loggedIn-page-options">
-            <a class="authorization" href="/Static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
-            class="authorization" href="#">Logout</a></p>
+            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
         <form action="" target="_self" method="post" class="forms">
             <input type="text" id="search-field" name="searchedProduct" placeholder="Search all products...">
             <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit"/>
         </form>
         <form action="" target="_self" method="post" class="forms">
-            <input type="button" id="cart-field" value="Cart">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
         </form>
     </div>
 

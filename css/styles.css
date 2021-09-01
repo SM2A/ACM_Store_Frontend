@@ -59,10 +59,15 @@ header {
     font-weight: bolder;
     text-decoration: none;
     color: #f2f2f2;
+    cursor: pointer;
 }
 
 .authorization:hover {
     color: rgb(219, 214, 214);
+}
+
+#logout-link {
+    cursor: pointer;
 }
 
 form {
