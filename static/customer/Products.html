@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/products.css?version=51">
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/js/navigationBar.js"></script>
+    <script>$.ajax({
+        url: "http://localhost:8080/products",
+        type: "GET",
+        success: function (response) {
+            for(let i = 0 ; i < response.length ; i++){
+                var div = document.createElement('div');
+                var divTitle = document.createElement('div');
+                var divPrice = document.createElement('div');
+                var img = document.createElement('img');
+                divTitle.className = "title";
+                divPrice.className = "price";
+                divTitle.innerHTML = response[i].title;
+                divPrice.innerHTML = "$" + response[i].price;
+                img.src = response[i].imgAddress;
+                div.className = "product";
+                div.appendChild(img);
+                div.appendChild(divTitle);
+                div.appendChild(divPrice);
+                document.getElementById("flex-container").appendChild(div);
+                //todo onclick to product page
+            }
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });</script>
+</head>
+
+<header>
+    <div id="logo-place">
+        <a id="logo" href="/index.html">digital</a>
+    </div>
+
+    <div>
+        <p id="default-page-options">
+            <a class="authorization" href="/Static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/Static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/Static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" href="#">Logout</a></p>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="text" id="search-field" name="searchedProduct" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit"/>
+        </form>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart">
+        </form>
+    </div>
+
+    <div>
+        <nav>
+            <ul class="navbar-lists">
+                <li><a href="#">Cameras</a></li>
+                <li><a href="#">cases</a></li>
+                <li><a href="#">video</a></li>
+                <li><a href="#">Accessories</a></li>
+                <li><a href="#">sport optic</a></li>
+                <li><a href="#">lifestyle</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<body>
+    <div id="path">Home &nbsp > &nbsp Products</div>
+    <hr>
+    <h2>PRODUCTS</h2>
+    <div id="sorting-dropdown-menu">
+        <label for="sorting">Sort by</label>
+        <select name="sorting" id="sorting">
+            <option value="best selling">Best Selling</option>
+            <option value="alphabetically, A-Z">Alphabetically, A-Z</option>
+            <option value="alphabetically, Z-A" selected>Alphabetically, Z-A</option>
+            <option value="price, low to high">Price, low to high</option>
+            <option value="price, high to low">Price, high to low</option>
+        </select>
+    </div>
+    <div id="flex-container"></div>
+</body>
+</html>

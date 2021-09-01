@@ -1,0 +1,82 @@
+#flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1em 10em 10em 11.5em;
+    padding: 2.5em;
+    text-align: center;
+}
+
+#flex-container > div {
+    background-color: white;
+    width: 2.5em;
+    margin: 0.1em 0.1em 0.5em 0.1em;
+    height: 3.1em;
+    text-align: center;
+    font-size: 6em;
+    text-align: left;
+}
+
+.title{
+    font-size: 15%;
+    font-family: 'Montserrat', sans-serif;
+    color: #797979;
+    margin-bottom: 2%;
+}
+
+.price{
+    font-size: 0.2em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+h2{
+    margin: 3em 5em 0 10em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+}
+
+img{
+    height: 2.5em;
+    width: 2.5em;
+    margin-bottom: 5%;
+    vertical-align: top;
+}
+
+#sorting-dropdown-menu{
+    float: right;
+    margin-top: -2%;
+    margin-right: 17.5%;
+    color: #797979;
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#sorting{
+    margin-left: 1.5em;
+    background-color: white;
+    border: 1px solid rgba(178,178,178,0.6);
+    text-align: left;
+    padding: 0.6em 9em 0.6em 0.6em;
+    color: #797979;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.product:hover{
+    opacity: 70%;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+hr{
+    margin-left: 15em;
+    margin-right: 17em;
+    color: rgba(255,255,255,0.04);
+    opacity: 20%;
+}
+
+#path{
+    margin: 1.5em 17em 1em 17.5em;
+    color: #797979;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 85%;
+}
