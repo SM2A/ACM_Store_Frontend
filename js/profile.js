@@ -1,3 +1,9 @@
+function showNumberWithSpaces(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return parts.join(".");
+}
+
 document.addEventListener('DOMContentLoaded', () => { // No one is logged in now so the profile can not be shown
     if (email === "" || password === "") {
         document.querySelector('#default-page-options').style.display = 'block';
@@ -19,14 +25,13 @@ document.addEventListener('DOMContentLoaded', () => { // No one is logged in now
                         success: function setProfileData(response) {
                             console.log(response);
                             document.querySelector('#id').innerHTML = response.id;
-                            document.querySelector('#password').innerHTML = response.password;
                             document.querySelector('#lastName').innerHTML = response.lastName;
                             document.querySelector('#firstName').innerHTML = response.firstName
                             document.querySelector('#email').innerHTML = response.email;
                             document.querySelector('#address').innerHTML = response.address;
                             document.querySelector('#phoneNumber').innerHTML = response.phoneNumber;
                             document.querySelector('#registerDate').innerHTML = response.registerDate;
-                            document.querySelector('#credit').innerHTML = response.credit;
+                            document.querySelector('#credit').innerHTML = showNumberWithSpaces(response.credit);
                         }
 
                     })

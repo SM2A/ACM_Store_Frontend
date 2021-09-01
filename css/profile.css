@@ -35,7 +35,7 @@ td {
     margin-bottom: 10%;
 }
 
-#addCredit, #editProfile {
+.profileButtons {
     padding: 1%;
     margin-bottom: 2%;
     background-color: #182e49;
@@ -47,15 +47,20 @@ td {
 
 #addCredit {
     position: absolute;
-    left: 40%;
+    left: 30%;
 }
 
 #editProfile {
     position: absolute;
-    left: 50%;
+    right: 31.5%;
 }
 
-#editProfile:hover, #addCredit:hover {
+#previousCarts {
+    position: absolute;
+    left: 43%;
+}
+
+#editProfile:hover, #addCredit:hover, #previousCarts:hover {
     background: #0a1829;
     transition: 0.6s;
 
