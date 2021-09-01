@@ -15,10 +15,10 @@
         type: "GET",
         success: function (response) {
             for(let i = 0 ; i < response.length ; i++){
-                var div = document.createElement('div');
-                var divTitle = document.createElement('div');
-                var divPrice = document.createElement('div');
-                var img = document.createElement('img');
+                let div = document.createElement('div');
+                let divTitle = document.createElement('div');
+                let divPrice = document.createElement('div');
+                let img = document.createElement('img');
                 divTitle.className = "title";
                 divPrice.className = "price";
                 divTitle.innerHTML = response[i].title;
@@ -28,8 +28,11 @@
                 div.appendChild(img);
                 div.appendChild(divTitle);
                 div.appendChild(divPrice);
+                let url = new URL("http://localhost:3000/static/Product.html");
+                url.searchParams.append("id", response[i].id);
+                let value = "window.location=" + "'" + url + "'";
+                div.setAttribute("onclick", value);
                 document.getElementById("flex-container").appendChild(div);
-                //todo onclick to product page
             }
         },
         error: function (response) {
