@@ -7,37 +7,20 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/cookie.js"></script>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/product.css">
+    <link rel="stylesheet" href="/css/product.css?version=51">
     <script type="text/javascript">
         para = new URLSearchParams(window.location.search);
         id = para.get("id");
-        name = "";
-        comments = [];
         $.ajax({
             url: "http://localhost:8080/comments/" + id,
             type: "GET",
             success: function (response) {
-                comments = response;
                 table = document.getElementById('comments')
                 for (let i = 0; i < response.length; i++) {
                     row = table.insertRow();
                     cell = row.insertCell();
-                    userID = response[i].userID;
-                    name = "";
-                    // console.log("id: " + userID)
-                    // $.ajax({
-                    //     url: "http://localhost:8080/users/" + userID,
-                    //     type: "GET",
-                    //     success: function (response) {
-                    //         console.log(response);
-                    //         name = response.firstName + response.lastName;
-                    //     },
-                    //     error: function (response) {
-                    //         //alert(response)
-                    //     }
-                    // });
-                    //cell.innerHTML = "<strong>"+ name +"</strong>" + ": <br>" + response[i].text;
-                    cell.innerHTML = "<strong>"+ userID +"</strong>" + ": <br>" + response[i].text;
+                    user = response[i].user;
+                    cell.innerHTML = "<strong>"+ user +"</strong>" + ": <br>" + response[i].text;
                 }
             },
             error: function (response) {
@@ -49,11 +32,11 @@
             url: "http://localhost:8080/products/" + id,
             type: "GET",
             success: function (response) {
-                console.log(response);
                 document.getElementById('title').innerHTML = response.title;
                 document.getElementById('price').innerHTML = '$' + response.price;
                 document.getElementById('rating').innerHTML = "Rating: " + response.rating;
                 document.getElementById('description').innerHTML = response.description;
+                document.getElementById('image').src = response.imgAddress;
                 document.getElementById('total-rating').innerHTML = "Rating: " + response.rating + "<br>Based on " + comments.length + " reviews";
             },
             error: function (response) {
@@ -61,6 +44,76 @@
                 alert(response)
             }
         });
+        var quantity = 1;
+        function checkState(){
+            email = getCookie("email");
+            password = getCookie("password");
+            if (((email === "") && (password !== ""))
+                || ((email !== "") && (password === ""))
+                || ((email === "") && (password === ""))) {
+                clearCookie();
+                alert("Please login first");
+                window.location = "/static/Login.html";
+            } else {
+                $.ajax({
+                    url: "http://localhost:8080/valid_login",
+                    type: "POST",
+                    data: {"email": email, "password": password},
+                    success: function (response) {
+                        if (response == "0") {
+                            alert("Please login first");
+                            window.location = "/static/Login.html";
+                        }
+                    }
+                });
+            }
+        }
+
+
+        function addToCart(){
+            checkState();
+            $.ajax({
+                url: "http://localhost:8080/carts/items/add",
+                type: "POST",
+                data: {"email": email, "password": password,"productId": id},
+                success: function (response) {
+                    document.getElementById('add-to-cart').style.display = "none";
+                    document.getElementById('show-quantity').style.display = "block";
+                    document.getElementById('description-title').style.marginTop = "5.5em";
+                    document.getElementById('quantity').innerHTML = "&nbsp " + quantity.toString() + " &nbsp";
+                },
+            });
+        }
+
+        function increase(){
+            $.ajax({
+                url: "http://localhost:8080/carts/items/add",
+                type: "POST",
+                data: {"email": email, "password": password,"productId": id},
+                success: function (response) {
+                    quantity++;
+                    document.getElementById('quantity').innerHTML = "&nbsp " + quantity.toString() + " &nbsp";
+                },
+            });
+        }
+
+        function decrease(){
+            if(quantity < 1)
+                alert("Quantity must be greater than zero!")
+            else{
+                $.ajax({
+                    url: "http://localhost:8080/carts/items/subtract",
+                    type: "POST",
+                    data: {"email": email, "password": password,"productId": id},
+                    success: function (response) {
+                        quantity--;
+                        document.getElementById('quantity').innerHTML = "&nbsp " + quantity.toString() + " &nbsp";
+                    },
+                });
+            }
+
+        }
+
     </script>
 </head>
 
@@ -94,13 +147,18 @@
 
 <section class="product">
     <div class="info">
-        <img src="../img/camera.jpg" alt="camera image">
+        <img id="image" style="width: 25em; height: 25em;">
         <div class="right-col">
             <h1 id="title"></h1>
             <h2 id="price"></h2>
             <h3 id="rating"></h3>
-            <input type="button" id="cart" value="ADD TO CART"><br>
-            <input type="button" id="buy" value="BUY IT NOW"><br>
+            <input type="button" id="add-to-cart" value="ADD TO CART" onclick="addToCart()"><br>
+            <div id="show-quantity" style="margin-top: -2%">
+                <input type="button" id="increase" value="+" onclick="increase()">
+                <span id="quantity">&nbsp 2 &nbsp</span>
+                <input type="button" id="decrease" value="-" onclick="decrease()">
+            </div>
+            <h3 id="description-title" style="margin-top:8.8em; font-size: 1.5em;">DESCRIPTION</h3>
             <hr>
             <div id="description">
             </div>

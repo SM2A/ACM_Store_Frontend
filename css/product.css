@@ -9,6 +9,10 @@ body {
     color: orange;
 }
 
+.product{
+    font-family: 'Montserrat', sans-serif;
+}
+
 .product img {
     float: left;
     margin: 2em 4em 5em 18em;
@@ -22,14 +26,15 @@ body {
     display: inline;
 }
 
-.product .right-col #cart {
+#add-to-cart{
     position: absolute;
     background-color: white;
     background-image: url('../img/cart.png');
     border: 3px solid #55bad3;
     color: #55bad3;
     margin-top: 3em;
-    padding: 15px 32px;
+    padding: 1em 1.5em;
+    /*padding: 15px 32px;*/
     text-align: left;
     text-indent: 2.5em;
     text-decoration: none;
@@ -40,6 +45,27 @@ body {
     background-repeat: no-repeat;
     background-size: 20%;
     background-origin: border-box;
+    display: inline-block;
+}
+
+#show-quantity{
+    display: none;
+}
+
+#increase, #decrease{
+    /*position: absolute;*/
+    background-color: white;
+    border: 3px solid #55bad3;
+    color: #55bad3;
+    margin-top: 1.9em;
+    width: 1.5em;
+    height: 1.5em;
+    /*padding: 1em 1.5em;*/
+    text-align: center;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .product .right-col #buy {
@@ -57,9 +83,10 @@ body {
 }
 
 .product .right-col hr {
-    margin-top: 15em;
+    margin-top: 2em;
     margin-right: 18em;
     color: #c5c5c5;
+    opacity: 50%;
 }
 
 .product .right-col .description {
@@ -71,6 +98,7 @@ body {
 .product .reviews hr {
     color: #c5c5c5;
     margin: 3em 18em 3em 18em;
+    opacity: 50%;
 }
 
 .product .reviews h2 {
@@ -108,4 +136,6 @@ body {
     /*font-weight: bold;*/
     font-size: 17px;
 }
+
+
 
