@@ -89,6 +89,27 @@
 
                                     cell = row.insertCell()
                                     cell.innerHTML = items[i].total
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = "➕"
+                                    cell.setAttribute("class","btn-op")
+                                    cell.addEventListener('click',function(){
+                                        addItem(items[i].id);
+                                    });
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = "➖"
+                                    cell.setAttribute("class","btn-op")
+                                    cell.addEventListener('click',function(){
+                                        removeItem(items[i].id);
+                                    });
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = "🗑"
+                                    cell.setAttribute("class","btn-op")
+                                    cell.addEventListener('click',function(){
+                                        deleteItem(items[i].id);
+                                    });
                                 }
                                 row = table.insertRow()
                                 cell = row.insertCell()
@@ -196,6 +217,10 @@
 
     button:hover {
         background: #182e49;
+    }
+
+    .btn-op{
+        cursor: pointer;
     }
 
 </style>

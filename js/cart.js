@@ -65,3 +65,54 @@ function purchase() {
         }
     });
 }
+
+function addItem(id) {
+    let email = getCookie("email");
+    let password = getCookie("password");
+    $.ajax({
+        url: "http://localhost:8080/carts/items/add",
+        type: "POST",
+        data: {"email": email, "password": password, "productId": id},
+        success: function () {
+            location.reload();
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });
+}
+
+function removeItem(id) {
+    let email = getCookie("email");
+    let password = getCookie("password");
+    $.ajax({
+        url: "http://localhost:8080/carts/items/subtract",
+        type: "POST",
+        data: {"email": email, "password": password, "productId": id},
+        success: function () {
+            location.reload();
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });
+}
+
+function deleteItem(id) {
+    let email = getCookie("email");
+    let password = getCookie("password");
+    $.ajax({
+        url: "http://localhost:8080/carts/items/delete",
+        type: "POST",
+        data: {"email": email, "password": password, "productId": id},
+        success: function () {
+            location.reload();
+        },
+        error: function (response) {
+            //todo response message
+            alert(response)
+        }
+    });
+}
