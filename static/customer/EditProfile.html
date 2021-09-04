@@ -52,7 +52,7 @@
                 <li><a href="#">Cameras</a></li>
                 <li><a href="#">Cases</a></li>
                 <li><a href="#">Video</a></li>
-                <li><a href="#">Accessorie</a></li>
+                <li><a href="#">Accessories</a></li>
                 <li><a href="#">Sport Optics</a></li>
                 <li><a href="#">Lifestyle</a></li>
             </ul>
@@ -103,8 +103,7 @@
             document.getElementById("address").setAttribute("value", response.address)
         },
         error: function (response) {
-            //todo response message
-            alert(response)
+            alert(response.responseText)
         }
     })
 
@@ -126,8 +125,7 @@
                         window.location.href = "/static/customer/Profile.html";
                     },
                     error: function (response) {
-                        //todo response message
-                        alert(response)
+                        alert(response.responseText)
                     }
                 });
             }else {

@@ -52,8 +52,7 @@
             }
         },
         error: function (response) {
-            //todo response message
-            alert(response)
+            alert(response.responseText)
         }
     });
 
@@ -70,8 +69,7 @@
                         window.location = "/static/admin/AddProduct.html";
                     },
                     error: function (response) {
-                        //todo response message
-                        alert(response)
+                        alert(response.responseText)
                     }
                 });
             } else {

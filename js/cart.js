@@ -41,8 +41,7 @@ function haveAccess(id) {
             }
         },
         error: function (response) {
-            //todo response message
-            alert(response)
+            alert(response.responseText)
         }
     });
     return permission;
@@ -60,8 +59,7 @@ function purchase() {
             window.location = "/";
         },
         error: function (response) {
-            //todo response message
-            alert(response)
+            alert(response.responseText)
         }
     });
 }
@@ -77,8 +75,7 @@ function addItem(id) {
             location.reload();
         },
         error: function (response) {
-            //todo response message
-            alert(response)
+            alert(response.responseText)
         }
     });
 }
@@ -94,8 +91,7 @@ function removeItem(id) {
             location.reload();
         },
         error: function (response) {
-            //todo response message
-            alert(response)
+            alert(response.responseText)
         }
     });
 }
@@ -111,8 +107,7 @@ function deleteItem(id) {
             location.reload();
         },
         error: function (response) {
-            //todo response message
-            alert(response)
+            alert(response.responseText)
         }
     });
 }
