@@ -3,87 +3,190 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title>Product</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/cookie.js"></script>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/product.css?version=51">
     <script type="text/javascript">
+        email = getCookie("email");
+        password = getCookie("password");
         para = new URLSearchParams(window.location.search);
         id = para.get("id");
-        $.ajax({
-            url: "http://localhost:8080/comments/" + id,
-            type: "GET",
-            success: function (response) {
-                table = document.getElementById('comments')
-                for (let i = 0; i < response.length; i++) {
-                    row = table.insertRow();
-                    cell = row.insertCell();
-                    user = response[i].user;
-                    cell.innerHTML = "<strong>"+ user +"</strong>" + ": <br>" + response[i].text;
+        quantityAvailable = undefined;
+        comments = undefined;
+        document.addEventListener('DOMContentLoaded', () => {
+            $.ajax({
+                url: "http://localhost:8080/comments/" + id,
+                type: "GET",
+                async: false,
+                success: function (response) {
+                    comments = JSON.parse(response);
+                    table = document.getElementById('comments');
+                    for (let i = 0; i < comments.length; i++) {
+                        commentId = comments[i].id;
+                        row = table.insertRow();
+                        cell = row.insertCell();
+                        cell.innerHTML = "<strong style='font-size: 20px'>" + comments[i].user + "</strong>" + ": <br>"
+                            + comments[i].text;
+                        cell = row.insertCell();
+                        console.log("commentID: " + commentId)
+                        cell.innerHTML = "<div style='font-size: 10px; text-align: right; display: flex; margin-left: 3em'> <div style='display: inline-block; float: left'>" +
+                                         "<img class="+ commentId + " onclick='like(this.className)' width='25' height='25' src='/img/thumbs-up.png' >" +
+                                         comments[i].likes + " &nbsp &nbsp" + "</div> <div style='display: inline-block; float: left'><img class=" +
+                                         commentId + " onclick='dislike(this.className)' width='25' height='25' src='/img/thumbs-down.png'>" + comments[i].dislikes + "</div> </div>";
+                    }
+                },
+                error: function (response) {
+                    alert(response.text)
                 }
-            },
-            error: function (response) {
-                //todo response message
-                alert(response)
-            }
-        });
-        $.ajax({
-            url: "http://localhost:8080/products/" + id,
-            type: "GET",
-            success: function (response) {
-                document.getElementById('title').innerHTML = response.title;
-                document.getElementById('price').innerHTML = '$' + response.price;
-                document.getElementById('rating').innerHTML = "Rating: " + response.rating;
-                document.getElementById('description').innerHTML = response.description;
-                document.getElementById('image').src = response.imgAddress;
-                document.getElementById('total-rating').innerHTML = "Rating: " + response.rating + "<br>Based on " + comments.length + " reviews";
-            },
-            error: function (response) {
-                //todo response message
-                alert(response)
-            }
-        });
-        var quantity = 1;
-        function checkState(){
-            email = getCookie("email");
-            password = getCookie("password");
+            });
+
+            $.ajax({
+                url: "http://localhost:8080/products/" + id,
+                type: "GET",
+                async: false,
+                success: function (response) {
+                    quantityAvailable = response.quantityAvailable;
+                    document.getElementById('title').innerHTML = response.title;
+                    document.getElementById('price').innerHTML = '$' + response.price;
+                    document.getElementById('rating').innerHTML = "Rating: " + response.rating;
+                    document.getElementById('description').innerHTML = response.description;
+                    document.getElementById('image').src = response.imgAddress;
+                    document.getElementById('total-rating').innerHTML = "Rating: " + response.rating + "<br>Based on " + comments.length + " reviews";
+                },
+                error: function (response) {
+                    alert(response.text)
+                }
+            });
+
             if (((email === "") && (password !== ""))
                 || ((email !== "") && (password === ""))
                 || ((email === "") && (password === ""))) {
                 clearCookie();
-                alert("Please login first");
-                window.location = "/static/Login.html";
+                document.getElementById('add-to-cart').style.display = "inline-block";
+                document.getElementById('show-quantity').style.display = "none";
+                document.getElementById('description-title').style.marginTop = "8.8em";
+            }else {
+                $.ajax({
+                    url: "http://localhost:8080/valid_login",
+                    type: "POST",
+                    data: {"email": email, "password": password},
+                    async: false,
+                    success: function (response) {
+                        if (response == "0") {
+                            document.getElementById('add-to-cart').style.display = "inline-block";
+                            document.getElementById('show-quantity').style.display = "none";
+                            document.getElementById('description-title').style.marginTop = "8.8em";
+                        }
+                        else if(response == "1") {
+                            update();
+                        }
+                    },
+                    error: function (response) {
+                        alert(response.text)
+                    }
+                });
+            }
+        });
+
+
+        function update() {
+            $.ajax({
+                url: "http://localhost:8080/carts",
+                type: "POST",
+                data: {"email": email, "password": password},
+                async: false,
+                success: function (carts) {
+                    quantity = 0;
+                    openCart = JSON.parse(carts);
+                    for (let j = 0; j < openCart.length; j++) {
+                        if (openCart[j].status == "OPEN") {
+                            get_url = "http://localhost:8080/carts/" + openCart[j].id;
+                            $.ajax({
+                                url: get_url,
+                                type: "GET",
+                                success: function (response) {
+                                    items = JSON.parse(response);
+                                    for (let i = 0; i < items.length; i++) {
+                                        if (items[i].id == id) {
+                                            quantity = items[i].quantity;
+                                        }
+                                    }
+                                    if (quantity < 1) {
+                                        document.getElementById('add-to-cart').style.display = "inline-block";
+                                        document.getElementById('show-quantity').style.display = "none";
+                                        document.getElementById('description-title').style.marginTop = "8.8em";
+                                    }
+                                    else {
+                                        document.getElementById('add-to-cart').style.display = "none";
+                                        document.getElementById('show-quantity').style.display = "block";
+                                        document.getElementById('description-title').style.marginTop = "5.5em";
+                                        document.getElementById('quantity').innerHTML = "&nbsp " + quantity + " &nbsp";
+                                    }
+
+                                },
+                                error: function (response) {
+                                    alert(response.text)
+                                }
+                            });
+                        }
+                    }
+                },
+                error: function (response) {
+                    alert(response.text)
+                }
+            });
+        }
+
+
+        function checkState(){
+            loggedIn = true;
+            if (((email === "") && (password !== ""))
+                || ((email !== "") && (password === ""))
+                || ((email === "") && (password === ""))) {
+                clearCookie();
+                loggedIn = false;
             } else {
                 $.ajax({
                     url: "http://localhost:8080/valid_login",
                     type: "POST",
                     data: {"email": email, "password": password},
+                    async: false,
                     success: function (response) {
                         if (response == "0") {
-                            alert("Please login first");
-                            window.location = "/static/Login.html";
+                            loggedIn = false;
                         }
+                    },
+                    error: function (response) {
+                        alert(response.text)
                     }
                 });
             }
+            return loggedIn;
         }
 
 
         function addToCart(){
-            checkState();
-            $.ajax({
-                url: "http://localhost:8080/carts/items/add",
-                type: "POST",
-                data: {"email": email, "password": password,"productId": id},
-                success: function (response) {
-                    document.getElementById('add-to-cart').style.display = "none";
-                    document.getElementById('show-quantity').style.display = "block";
-                    document.getElementById('description-title').style.marginTop = "5.5em";
-                    document.getElementById('quantity').innerHTML = "&nbsp " + quantity.toString() + " &nbsp";
-                },
-            });
+            if(checkState()) {
+                $.ajax({
+                    url: "http://localhost:8080/carts/items/add",
+                    type: "POST",
+                    data: {"email": email, "password": password, "productId": id},
+                    success: function (response) {
+                        update();
+                        document.location.reload();
+                    },
+                    error: function (response) {
+                        alert(response.text)
+                    }
+                });
+            }else{
+                alert("Please login first");
+                window.location = "/static/Login.html";
+            }
         }
+
 
         function increase(){
             $.ajax({
@@ -91,27 +194,70 @@
                 type: "POST",
                 data: {"email": email, "password": password,"productId": id},
                 success: function (response) {
-                    quantity++;
-                    document.getElementById('quantity').innerHTML = "&nbsp " + quantity.toString() + " &nbsp";
+                    update()
+                    document.location.reload();
                 },
+                error: function (response) {
+                    alert(response.text)
+                }
             });
         }
 
-        function decrease(){
-            if(quantity < 1)
-                alert("Quantity must be greater than zero!")
-            else{
-                $.ajax({
-                    url: "http://localhost:8080/carts/items/subtract",
-                    type: "POST",
-                    data: {"email": email, "password": password,"productId": id},
-                    success: function (response) {
-                        quantity--;
-                        document.getElementById('quantity').innerHTML = "&nbsp " + quantity.toString() + " &nbsp";
-                    },
-                });
-            }
 
+        function decrease(){
+            $.ajax({
+                url: "http://localhost:8080/carts/items/subtract",
+                type: "POST",
+                data: {"email": email, "password": password,"productId": id},
+                success: function (response) {
+                    update();
+                    document.location.reload();
+                },
+                error: function (response) {
+                    alert(response.text)
+                }
+            });
+        }
+
+        function like(commentId){
+            if(checkState()) {
+                $.ajax({
+                    url: "http://localhost:8080/comments/" + commentId + "/like",
+                    type: "POST",
+                    data: {"id": commentId},
+                    success: function (response) {
+                        alert(response)
+                        document.location.reload();
+                    },
+                    error: function (response) {
+                        alert(response.text)
+                    }
+                });
+            }else{
+                alert("Please login first");
+                window.location = "/static/Login.html";
+            }
+        }
+
+
+        function dislike(commentId){
+            if(checkState()) {
+                $.ajax({
+                    url: "http://localhost:8080/comments/" + commentId + "/dislike",
+                    type: "POST",
+                    data: {"id": commentId},
+                    success: function (response) {
+                        alert(response)
+                        document.location.reload();
+                    },
+                    error: function (response) {
+                        alert(response.text)
+                    }
+                });
+            }else{
+                alert("Please login first");
+                window.location = "/static/Login.html";
+            }
         }
 
     </script>
@@ -171,10 +317,18 @@
                     <td id="total-rating"></td>
                 </tr>
                 <tr>
-                    <td><a href="#">Write a review > </a></td>
+                    <td>
+                        <form id="review-form" action="http://localhost:8080/comments/add" method="post">
+                            <label for="message">Message</label>
+                            <textarea name="message" id="message" cols="49%" rows="12%"></textarea>
+
+                            <input type="submit" id="write-review-btn" value="Write a review">
+                        </form>
+                    </td>
                 </tr>
             </table>
             <table id="comments">
+                <col style="width: 70%">
             </table>
         </div>
     </div>
@@ -182,4 +336,30 @@
 
 </body>
 </html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#review-form').submit(function (event) {
+            event.preventDefault();
+            if(checkState()) {
+                $.ajax({
+                    url: "http://localhost:8080/comments/add",
+                    type: "POST",
+                    data: {"email": email, "password": password, "text": $("#message").val(), productID: id},
+                    async: false,
+                    success: function (response) {
+                        alert(response);
+                        window.location.reload();
+                    },
+                    error: function (response) {
+                        alert(response.text)
+                    }
+                });
+            }else{
+                alert("Please login first");
+                window.location = "/static/Login.html";
+            }
+        })
+    })
+</script>
 

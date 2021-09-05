@@ -13,9 +13,9 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.product img {
+.product #image {
     float: left;
-    margin: 2em 4em 5em 18em;
+    margin: 2em 4em 2em 18em;
 }
 
 .product .right-col {
@@ -45,11 +45,6 @@ body {
     background-repeat: no-repeat;
     background-size: 20%;
     background-origin: border-box;
-    display: inline-block;
-}
-
-#show-quantity{
-    display: none;
 }
 
 #increase, #decrease{
@@ -106,8 +101,9 @@ body {
 }
 
 .product .reviews #write-review {
-    margin-left: 18em;
+    margin-left: 17.5em;
     margin-top: 2em;
+    margin-bottom: 4em;
     text-align: left;
     width: 20%;
     float: left;
@@ -126,16 +122,43 @@ body {
 
 .product .reviews #comments {
     margin-top: 2em;
-    margin-left: 40em;
-    border: none;
+    margin-left: 45.5em;
+    margin-right: 12em;
+    width: 35em;
+}
+
+#comments td img:hover{
+    cursor: pointer;
 }
 
 .product .reviews #comments th, .product .reviews #comments td {
     border: none;
-    padding: 15px;
+    padding: 20px;
     /*font-weight: bold;*/
     font-size: 17px;
 }
+
+#write-review-btn {
+    /*position: absolute;*/
+    background-color: #55bad3;
+    border: none;
+    color: white;
+    margin-top: 3%;
+    padding: 3% 5%;
+    /*margin-top: 6em;*/
+    /*padding: 19px 62px;*/
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#message{
+    border: 1px solid #c5c5c5;
+    margin-top: 3%;
+}
+
 
 
 
