@@ -2,19 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Carts</title>
+    <title>Products</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/cookie.js"></script>
     <script type="text/javascript" src="/js/admin.js"></script>
 </head>
 <body>
-<table id="carts" class="center">
+<table id="products" class="center">
     <tr>
         <th>ID</th>
-        <th>User Id</th>
-        <th>Status</th>
-        <th>Purchase Date</th>
-        <th>Total</th>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Rating</th>
+        <th>Description</th>
+        <th>Image</th>
     </tr>
 </table>
 </body>
@@ -22,34 +25,43 @@
 
 <script type="text/javascript">
     $.ajax({
-        url: "http://localhost:8080/carts/all",
+        url: "http://localhost:8080/products",
         type: "GET",
         success: function (response) {
-            table = document.getElementById('carts');
-            carts = JSON.parse(response);
-            for (let i = 0; i < carts.length; i++) {
+            table = document.getElementById('products');
+            for (let i = 0; i < response.length; i++) {
                 row = table.insertRow();
-
                 para = new URLSearchParams();
-                para.append("id", carts[i].id);
-                link = "http://localhost:3000/static/admin/CartItems.html?" + para.toString();
+                para.append("id", response[i].id);
+                link = "http://localhost:3000/static/admin/EditProduct.html?" + para.toString();
                 attribute = "window.location=" + "'" + link + "'";
                 row.setAttribute("onclick", attribute);
 
                 cell = row.insertCell();
-                cell.innerHTML = carts[i].id;
+                cell.innerHTML = response[i].id;
 
                 cell = row.insertCell();
-                cell.innerHTML = carts[i].userID;
+                cell.innerHTML = response[i].title;
 
                 cell = row.insertCell();
-                cell.innerHTML = carts[i].status;
+                cell.innerHTML = response[i].quantityAvailable;
 
                 cell = row.insertCell();
-                cell.innerHTML = carts[i].purchaseDate;
+                cell.innerHTML = response[i].category;
 
                 cell = row.insertCell();
-                cell.innerHTML = carts[i].total;
+                cell.innerHTML = response[i].price;
+
+                cell = row.insertCell();
+                cell.innerHTML = response[i].rating;
+
+                cell = row.insertCell();
+                cell.innerHTML = response[i].description;
+
+                cell = row.insertCell();
+                img = document.createElement("img");
+                img.src = response[i].imgAddress;
+                cell.appendChild(img);
             }
         },
         error: function (response) {
@@ -69,6 +81,7 @@
 
     td {
         text-align: center;
+        height: 100px;
     }
 
     tr {
@@ -87,6 +100,11 @@
 
     tr:hover {
         background: #ffadad;
+    }
+
+    img{
+        width: 100%;
+        height: 100%;
     }
 
 </style>

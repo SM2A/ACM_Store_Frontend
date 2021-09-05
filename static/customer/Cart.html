@@ -118,16 +118,14 @@
                                 cell.innerHTML = openCart[j].total
                             },
                             error: function (response) {
-                                //todo response message
-                                alert(response)
+                                alert(response.responseText)
                             }
                         });
                     }
                 }
             },
             error: function (response) {
-                //todo response message
-                alert(response)
+                alert(response.responseText)
             }
         });
     }else {
@@ -163,8 +161,7 @@
                     }
                 },
                 error: function (response) {
-                    //todo response message
-                    alert(response)
+                    alert(response.responseText)
                 }
             });
         } else {

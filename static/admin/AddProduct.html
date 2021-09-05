@@ -15,14 +15,14 @@
             <input name="title" type="text" placeholder="Title" required/>
         </label><br/>
         <label>
-            <input id="form-price" name="price" type="number" min="0" step="1" placeholder="Price" required/>
+            <input name="price" type="number" min="0" step="1" placeholder="Price" required/>
         </label><br/>
         <label>
             <input name="quantityAvailable" type="number" min="0" step="1" placeholder="Quantity" required/>
         </label><br/>
         <label>
             <select name="category" id="category">
-                <option disabled hidden selected value="">Category</option>
+                <option disabled hidden selected >Category</option>
             </select>
         </label><br/>
         <label>
@@ -52,8 +52,7 @@
             }
         },
         error: function (response) {
-            //todo response message
-            alert(response)
+            alert(response.responseText)
         }
     });
 
@@ -70,8 +69,7 @@
                         window.location = "/static/admin/AddProduct.html";
                     },
                     error: function (response) {
-                        //todo response message
-                        alert(response)
+                        alert(response.responseText)
                     }
                 });
             } else {
