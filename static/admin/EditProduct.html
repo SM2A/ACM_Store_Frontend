@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript" src="/js/admin.js"></script>
+</head>
+<body>
+<div class="form-container">
+    <h2>Edit Product</h2>
+    <form action="http://localhost:8080/products/edit" method="post" id="product-form">
+        <label>
+            <input id="title" name="title" type="text" placeholder="Title" required/>
+        </label><br/>
+        <label>
+            <input id="price" name="price" type="number" min="0" step="1" placeholder="Price" required/>
+        </label><br/>
+        <label>
+            <input id="quantity"
+                   name="quantityAvailable" type="number" min="0" step="1" placeholder="Quantity" required/>
+        </label><br/>
+        <label>
+            <select name="category" id="category">
+                <option disabled hidden>Category</option>
+            </select>
+        </label><br/>
+        <label>
+            <input id="image" name="imgAddress" type="text" placeholder="Image Address" required/>
+        </label><br/>
+        <label>
+            <textarea id="description" name="description" placeholder="Description" rows="8" required></textarea>
+        </label><br/>
+        <button type="submit">Edit</button>
+    </form>
+    <label id="rtn-str">
+        <span>or </span><a href="/static/admin/Products.html">Return to Products Page</a>
+    </label>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+    para = new URLSearchParams(window.location.search);
+    id = para.get("id");
+    get_url = "http://localhost:8080/products/" + id;
+    $.ajax({
+        url: get_url,
+        type: "GET",
+        success: function (product) {
+            document.getElementById("title").setAttribute("value", product.title)
+            document.getElementById("price").setAttribute("value", product.price)
+            document.getElementById("quantity").setAttribute("value", product.quantityAvailable)
+            document.getElementById("image").setAttribute("value", product.imgAddress)
+            document.getElementById("description").innerHTML = product.description
+            $.ajax({
+                url: "http://localhost:8080/products/category",
+                type: "GET",
+                success: function (response) {
+                    select = document.getElementById('category')
+                    for (let i = 0; i < response.length; i++) {
+                        option = new Option(response[i], response[i])
+                        if (response[i] == product.category) {
+                            option.setAttribute("selected", "")
+                        }
+                        select.appendChild(option)
+                    }
+                },
+                error: function (response) {
+                    alert(response.responseText)
+                }
+            });
+        },
+        error: function (response) {
+            alert(response.responseText)
+        }
+    });
+
+    $(document).ready(function () {
+        $('#product-form').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "http://localhost:8080/products/edit",
+                type: "POST",
+                data: {
+                    "id": id,
+                    "title": $("#title").val(),
+                    "description": $("#description").val(),
+                    "quantityAvailable": $("#quantity").val(),
+                    "price": $("#price").val(),
+                    "category": $("#category").val(),
+                    "imgAddress": $("#image").val()
+                },
+                success: function (response) {
+                    alert(response)
+                    window.location.href = "/static/admin/Products.html";
+                },
+                error: function (response) {
+                    alert(response.responseText)
+                }
+            });
+        })
+    })
+</script>
+
+<style>
+
+    .form-container {
+        position: absolute;
+        top: 37%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 20%;
+    }
+
+    .form-container h2 {
+        position: relative;
+        left: 30%;
+    }
+
+    .form-container input {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container input:valid {
+        background: #e6f0ff;
+    }
+
+    .form-container input:invalid {
+        background: #ffeded;
+    }
+
+    .form-container select {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container select:valid {
+        background: #e6f0ff;
+    }
+
+    .form-container select:invalid {
+        background: #ffeded;
+    }
+
+    .form-container textarea {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container textarea:valid {
+        background: #e6f0ff;
+    }
+
+    .form-container textarea:invalid {
+        background: #ffeded;
+    }
+
+    .form-container button {
+        position: relative;
+        left: 33%;
+        margin: 10px;
+        background: #4286db;
+        border-radius: 3px;
+        border: none;
+        width: 35%;
+        padding: 10px;
+        text-align: center;
+        font-size: 15px;
+        color: white;
+    }
+
+    .form-container button:hover {
+        background: #182e49;
+    }
+
+    #rtn-str {
+        position: relative;
+        left: 23%;
+        margin: 10px;
+    }
+
+    #rtn-str a {
+        color: #4286db;
+        text-decoration: none;
+    }
+
+    #rtn-str span {
+        color: #4a4a4a;
+    }
+
+</style>

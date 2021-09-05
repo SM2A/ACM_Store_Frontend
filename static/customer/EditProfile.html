@@ -121,14 +121,14 @@
                     },
                     success: function (response) {
                         alert(response)
-                        setCooike("email",$("#eMail").val())
+                        setCooike("email", $("#eMail").val())
                         window.location.href = "/static/customer/Profile.html";
                     },
                     error: function (response) {
                         alert(response.responseText)
                     }
                 });
-            }else {
+            } else {
                 alert("Password Incorrect")
             }
         })
