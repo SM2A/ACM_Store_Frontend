@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         },
         error: function (error) {
-            console.log(error);
+            console.log(error.responseText);
         }
     })
 
@@ -65,10 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 category.className = "top-div";
                 category.innerHTML = response[j][0].category;
                 document.getElementById("product-summary").appendChild(category);
-                let moreDiv = document.createElement('p');
+                let moreDiv = document.createElement('a');
                 moreDiv.id = "more";
                 moreDiv.className = "top-div";
                 moreDiv.innerHTML = "More " + response[j][0].category + " &#10095";
+                let url = new URL("http://localhost:3000/static/Products.html");
+                url.searchParams.append("category",response[j][0].category);
+                moreDiv.setAttribute("href", url);
                 document.getElementById("product-summary").appendChild(moreDiv);
                 for (let i = 0; i < response[j].length; i++) {
                     flexContainerDiv.id = "flex-container";
@@ -100,8 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
         error: function (response) {
-            //todo response message
-            console.log(response);
+            console.log(response.responseText);
             alert("Maybe You should Go To localhost:8080/test To Set Some Products First!\nThen Comeback to Homepage")
         }
     });

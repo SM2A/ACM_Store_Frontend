@@ -130,6 +130,8 @@ hr {
     position: absolute;
     right: 17%;
     color: #779bd2;
+    text-decoration: none;
+    padding-top: 2em;
 }
 
 .top-div {

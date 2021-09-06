@@ -1,100 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" type="text/css" href="/css/profile.css">
-    <link rel="stylesheet" type="text/css" href="/css/styles.css?version=51">
-    <script type="text/javascript" src="/js/cart.js"></script>
-    <script type="text/javascript" src="/js/cookie.js"></script>
-    <script src="/js/profile.js"></script>
-    <script src="/js/navigationBar.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Profile</title>
+        <link rel="stylesheet" type="text/css" href="/css/profile.css">
+        <link rel="stylesheet" type="text/css" href="/css/styles.css?version=51">
+        <script type="text/javascript" src="/js/cart.js"></script>
+        <script type="text/javascript" src="/js/cookie.js"></script>
+        <script src="/js/profile.js"></script>
+        <script src="/js/navigationBar.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    </head>
 
-<header>
-    <div id="logo-place">
-        <a id="logo" href="/">digital</a>
-    </div>
+    <header>
+        <div id="logo-place">
+            <a id="logo" href="/">digital</a>
+        </div>
 
-    <div>
-        <p id="default-page-options">
-            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
-                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
-        <p id="loggedIn-page-options">
-            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
-                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
-        <form action="" target="_self" method="post" class="forms">
-            <input type="text" id="search-field" name="searchedProduct" placeholder="Search all products...">
-            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit"/>
-        </form>
-        <form action="" target="_self" method="post" class="forms">
-            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
-        </form>
-    </div>
+        <div>
+            <p id="default-page-options">
+                <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                    class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+            <p id="loggedIn-page-options">
+                <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                    class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+            <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+                <input type="text" id="search-field" name="name" placeholder="Search all products...">
+                <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+            </form>
+            <form action="" target="_self" method="post" class="forms">
+                <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+            </form>
+        </div>
 
-    <div>
-        <nav>
-            <ul class="navbar-lists">
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">cases</a></li>
-                <li><a href="#">video</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">sport optic</a></li>
-                <li><a href="#">lifestyle</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+        <div>
+            <nav>
+                <ul class="navbar-lists" id="navbar-lists">
+                    <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<body>
-<div id="profile-div">
-    <h2>"Your Profile Information"</h2>
-    <table>
-        <tr>
-            <th>Id:</th>
-            <td id="id"></td>
-        </tr>
-        <tr>
-            <th>First Name:</th>
-            <td id="firstName"></td>
-        </tr>
-        <tr>
-            <th>Last Name:</th>
-            <td id="lastName"></td>
-        </tr>
-        <tr>
-            <th>Email:</th>
-            <td id="email"></td>
-        </tr>
-        <tr>
-            <th>Phone Number:</th>
-            <td id="phoneNumber"></td>
-        </tr>
-        <tr>
-            <th>Address:</th>
-            <td id="address"></td>
-        </tr>
-        <tr>
-            <th>Credit:</th>
-            <td id="credit"></td>
-        </tr>
-        <tr>
-            <th>Register Date:</th>
-            <td id="registerDate"></td>
-        </tr>
-    </table>
-</div>
+    <body>
+        <div id="profile-div">
+            <h2>"Your Profile Information"</h2>
+            <table>
+                <tr>
+                    <th>Id:</th>
+                    <td id="id"></td>
+                </tr>
+                <tr>
+                    <th>First Name:</th>
+                    <td id="firstName"></td>
+                </tr>
+                <tr>
+                    <th>Last Name:</th>
+                    <td id="lastName"></td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td id="email"></td>
+                </tr>
+                <tr>
+                    <th>Phone Number:</th>
+                    <td id="phoneNumber"></td>
+                </tr>
+                <tr>
+                    <th>Address:</th>
+                    <td id="address"></td>
+                </tr>
+                <tr>
+                    <th>Credit:</th>
+                    <td id="credit"></td>
+                </tr>
+                <tr>
+                    <th>Register Date:</th>
+                    <td id="registerDate"></td>
+                </tr>
+            </table>
+        </div>
 
-<div id="redirections">
-    <br><br>
-    <a class="profileButtons" id="addCredit" href="/static/customer/Credit.html">Add Credit</a>
-    <a class="profileButtons" id="editProfile" href="/static/customer/EditProfile.html">Edit Profile</a>
-    <a class="profileButtons" id="previousCarts" href="/static/customer/Carts.html">Your Purchase History</a>
-    <a class="profileButtons" id="changePassword" href="/static/customer/ChangePassword.html">Change Password</a>
-</div>
+        <div id="redirections">
+            <br><br>
+            <a class="profileButtons" id="addCredit" href="/static/customer/Credit.html">Add Credit</a>
+            <a class="profileButtons" id="editProfile" href="/static/customer/EditProfile.html">Edit Profile</a>
+            <a class="profileButtons" id="previousCarts" href="/static/customer/Carts.html">Your Purchase History</a>
+            <a class="profileButtons" id="changePassword" href="/static/customer/ChangePassword.html">Change Password</a>
+        </div>
 
-</body>
+    </body>
 
 </html>
