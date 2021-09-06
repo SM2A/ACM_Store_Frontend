@@ -29,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => { //wait until the html file
                     document.getElementById('default-page-options').style.display = 'none';
                     document.getElementById('loggedIn-page-options').style.display = 'block';
                     console.log("Someone is logged in");
-                    //todo logout link
                 }
                 else if(response === "0"){
                     document.getElementById('default-page-options').style.display = 'block';
@@ -39,3 +38,29 @@ document.addEventListener('DOMContentLoaded', () => { //wait until the html file
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    $.ajax({
+        url: "http://localhost:8080/products/category",
+        type: "GET",
+        success: function (response) {
+            console.log(response);
+            for(let i = 0 ; i < response.length && i < 6 ; i++){
+                let li = document.createElement('li');
+                let a = document.createElement('a');
+                a.innerHTML = response[i];
+                let url = new URL("http://localhost:3000/static/Products.html");
+                url.searchParams.append("category", response[i]);
+                a.setAttribute("href", url);
+                li.appendChild(a);
+                document.getElementById("navbar-lists").appendChild(li);
+            }
+        },
+        error: function (response) {
+            console.log(response.responseText);
+            alert("Maybe You should Go To localhost:8080/test To Set Some Products First!\nThen Comeback to Homepage")
+        }
+    });
+});
+
+

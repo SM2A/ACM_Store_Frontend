@@ -1,50 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomePage</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <script type="text/javascript" src="/js/cookie.js"></script>
-    <script type="text/javascript" src="/js/cart.js"></script>
-    <script src="/js/navigationBar.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HomePage</title>
+        <link rel="stylesheet" href="/css/styles.css">
+        <script type="text/javascript" src="/js/cookie.js"></script>
+        <script type="text/javascript" src="/js/cart.js"></script>
+        <script src="/js/navigationBar.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    </head>
 
-<header>
-    <div id="logo-place">
-        <a id="logo" href="/">digital</a>
-    </div>
+    <header>
+        <div id="logo-place">
+            <a id="logo" href="/">digital</a>
+        </div>
 
-    <div>
-        <p id="default-page-options">
-            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
-                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
-        <p id="loggedIn-page-options">
-            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
-                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
-        <form action="" target="_self" method="post" class="forms">
-            <input type="text" id="search-field" name="searchedProduct" placeholder="Search all products...">
-            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit"/>
-        </form>
-        <form action="" target="_self" method="post" class="forms">
-            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
-        </form>
-    </div>
+        <div>
+            <p id="default-page-options">
+                <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                    class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+            <p id="loggedIn-page-options">
+                <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                    class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+            <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+                <input type="text" id="search-field" name="name" placeholder="Search all products...">
+                <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+            </form>
+            <form target="_self" method="post" class="forms">
+                <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+            </form>
+        </div>
 
-    <div>
-        <nav>
-            <ul class="navbar-lists">
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">cases</a></li>
-                <li><a href="#">video</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">sport optic</a></li>
-                <li><a href="#">lifestyle</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+        <div>
+            <nav>
+                <ul class="navbar-lists" id="navbar-lists">
+                    <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
 </html>
