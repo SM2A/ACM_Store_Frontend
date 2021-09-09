@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/main.css">
     <title>Signup</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <link rel="icon" href="/img/icon.jpg">
+    <link rel="stylesheet" href="/css/styles.css?version=51">
+    <script type="text/javascript" src="/js/navigationBar.js?version=51"></script>
     <script type="text/javascript">
-        email = getCookie("email");
-        password = getCookie("password");
         if (((email === "") && (password !== ""))
             || ((email !== "") && (password === ""))
             || ((email === "") && (password === ""))) {
@@ -31,36 +31,36 @@
         }
     </script>
 </head>
-<body>
-<div class="navbar">
-    <div class="container">
-        <div class="top-navbar">
-            <a class="logo" href="#">Digital</a>
-            <div class="right-navbar">
-                <p><a class="login" href="#">Sign in</a> or <a class="login" href="#">Create an Account</a></p>
-                <form action="">
-                    <label for="search-products">
-                        <input type="text" id="search-products" name="search-products"
-                               placeholder="Search all products">
-                    </label>
-                    <input type="submit" class="search-cta" value="Search">
-                </form>
-                <a class="cart" href="#">Cart</a><br>
-            </div>
-        </div>
+<header>
+    <div id="logo-place">
+        <a id="logo" href="/">digital</a>
+    </div>
+
+    <div>
+        <p id="default-page-options">
+            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+        <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+            <input type="text" id="search-field" name="name" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+        </form>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+        </form>
+    </div>
+
+    <div>
         <nav>
-            <ul
-                    class="primary-nav">
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">Cases</a></li>
-                <li><a href="#">Video</a></li>
-                <li><a href="#">Accessorie</a></li>
-                <li><a href="#">Sport Optics</a></li>
-                <li><a href="#">Lifestyle</a></li>
+            <ul class="navbar-lists" id="navbar-lists">
+                <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
             </ul>
         </nav>
     </div>
-</div>
+</header>
+<body>
 <div class="form-container">
     <h2>Create Account</h2>
     <form action="http://localhost:8080/signup" method="post" id="signup-form">
@@ -83,7 +83,7 @@
             <input name="address" type="text" placeholder="Address" required/>
         </label><br/>
         <button type="submit">CREATE</button>
-    </form>
+    </form><br/>
     <label id="rtn-str">
         <span>or </span><a href="/">Return to Store</a>
     </label>
@@ -117,7 +117,7 @@
 
     .form-container {
         position: absolute;
-        top: 65%;
+        top: 63%;
         left: 50%;
         margin-right: -50%;
         transform: translate(-50%, -50%);

@@ -6,9 +6,10 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/cookie.js"></script>
     <script type="text/javascript" src="/js/cart.js"></script>
+    <link rel="icon" href="/img/icon.jpg">
+    <link rel="stylesheet" href="/css/styles.css?version=51">
+    <script type="text/javascript" src="/js/navigationBar.js?version=51"></script>
     <script type="text/javascript">
-        email = getCookie("email");
-        password = getCookie("password");
         if (((email === "") && (password !== ""))
             || ((email !== "") && (password === ""))
             || ((email === "") && (password === ""))) {
@@ -30,6 +31,35 @@
         }
     </script>
 </head>
+<header>
+    <div id="logo-place">
+        <a id="logo" href="/">digital</a>
+    </div>
+
+    <div>
+        <p id="default-page-options">
+            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+        <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+            <input type="text" id="search-field" name="name" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+        </form>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+        </form>
+    </div>
+
+    <div>
+        <nav>
+            <ul class="navbar-lists" id="navbar-lists">
+                <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 <body>
 <table id="items" class="center">
     <tr>
@@ -58,7 +88,7 @@
                 for (let j = 0; j < openCart.length; j++) {
                     if (openCart[j].status == "OPEN") {
 
-                        if (openCart[j].total == 0){
+                        if (openCart[j].total == 0) {
                             document.getElementById("purchase-btn").style.display = "none";
                         }
 
@@ -92,22 +122,22 @@
 
                                     cell = row.insertCell()
                                     cell.innerHTML = "➕"
-                                    cell.setAttribute("class","btn-op")
-                                    cell.addEventListener('click',function(){
+                                    cell.setAttribute("class", "btn-op")
+                                    cell.addEventListener('click', function () {
                                         addItem(items[i].id);
                                     });
 
                                     cell = row.insertCell()
                                     cell.innerHTML = "➖"
-                                    cell.setAttribute("class","btn-op")
-                                    cell.addEventListener('click',function(){
+                                    cell.setAttribute("class", "btn-op")
+                                    cell.addEventListener('click', function () {
                                         removeItem(items[i].id);
                                     });
 
                                     cell = row.insertCell()
                                     cell.innerHTML = "🗑"
-                                    cell.setAttribute("class","btn-op")
-                                    cell.addEventListener('click',function(){
+                                    cell.setAttribute("class", "btn-op")
+                                    cell.addEventListener('click', function () {
                                         deleteItem(items[i].id);
                                     });
                                 }
@@ -128,7 +158,7 @@
                 alert(response.responseText)
             }
         });
-    }else {
+    } else {
         if (haveAccess(id)) {
             document.getElementById("purchase-btn").style.display = "none";
             get_url = "http://localhost:8080/carts/" + id;
@@ -216,7 +246,7 @@
         background: #182e49;
     }
 
-    .btn-op{
+    .btn-op {
         cursor: pointer;
     }
 
