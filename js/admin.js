@@ -1,5 +1,5 @@
-let email = getCookie("email");
-let password = getCookie("password");
+// let email = getCookie("email");
+// let password = getCookie("password");
 
 if (((email === "") && (password !== ""))
     || ((email !== "") && (password === ""))

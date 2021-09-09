@@ -2,11 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Product</title>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="/js/cookie.js"></script>
+    <link rel="icon" href="/img/icon.jpg">
+    <link rel="stylesheet" href="/css/styles.css?version=51">
+    <link rel="stylesheet" href="/css/index.css?version=51">
+    <script type="text/javascript" src="/js/navigationBar.js?version=51"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
     <script type="text/javascript" src="/js/admin.js"></script>
+    <title>Add Product</title>
 </head>
+<header>
+    <div id="logo-place">
+        <a id="logo" href="/">digital</a>
+    </div>
+
+    <div>
+        <p id="default-page-options">
+            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+        <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+            <input type="text" id="search-field" name="name" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+        </form>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+        </form>
+    </div>
+
+    <div>
+        <nav>
+            <ul class="navbar-lists" id="navbar-lists">
+                <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
 <body>
 <div class="form-container">
     <h2>Add Product</h2>
@@ -21,8 +55,8 @@
             <input name="quantityAvailable" type="number" min="0" step="1" placeholder="Quantity" required/>
         </label><br/>
         <label>
-            <select name="category" id="category">
-                <option disabled hidden selected >Category</option>
+            <select name="category" id="category_">
+                <option disabled hidden selected>Category</option>
             </select>
         </label><br/>
         <label>
@@ -33,6 +67,7 @@
         </label><br/>
         <button type="submit">Add</button>
     </form>
+    <br/>
     <label id="rtn-str">
         <span>or </span><a href="/static/admin/Admin.html">Return to Admin Page</a>
     </label>
@@ -46,7 +81,7 @@
         url: "http://localhost:8080/products/category",
         type: "GET",
         success: function (response) {
-            select = document.getElementById('category')
+            select = document.getElementById('category_')
             for (let i = 0; i < response.length; i++) {
                 select.appendChild(new Option(response[i], response[i]))
             }
@@ -59,7 +94,7 @@
     $(document).ready(function () {
         $('#product-form').submit(function (event) {
             event.preventDefault();
-            if (document.getElementById('category').value) {
+            if (document.getElementById('category_').value) {
                 $.ajax({
                     url: "http://localhost:8080/products/add",
                     type: "POST",
@@ -84,7 +119,7 @@
 
     .form-container {
         position: absolute;
-        top: 37%;
+        top: 70%;
         left: 50%;
         margin-right: -50%;
         transform: translate(-50%, -50%);
@@ -167,7 +202,7 @@
 
     #rtn-str {
         position: relative;
-        left: 25%;
+        left: 23%;
         margin: 10px;
     }
 
