@@ -19,23 +19,43 @@ document.addEventListener('DOMContentLoaded', () => { //wait until the html file
         document.getElementById('loggedIn-page-options').style.display = 'none';
         console.log("No one is logged in");
     } else { // when user is logged in, the options are: 1-profile 2-logout
-        $.ajax({
-            url: "http://localhost:8080/valid_login",
-            type: "POST",
-            data: {"email": email, "password": password},
-            success: function (response) {
-                if (response === "1") {
-                    isLoggedIn = true;
-                    document.getElementById('default-page-options').style.display = 'none';
-                    document.getElementById('loggedIn-page-options').style.display = 'block';
-                    console.log("Someone is logged in");
+        if (document.readyState !== 'loading') {
+            $.ajax({
+                url: "http://localhost:8080/valid_login",
+                type: "POST",
+                data: {"email": email, "password": password},
+                async: false,
+                success: function (response) {
+                    if (response === "1") {
+                        isLoggedIn = true;
+                        $.ajax({
+                            url: "http://localhost:8080/valid_admin",
+                            type: "POST",
+                            data: {"email": email, "password": password},
+                            async: false,
+                            success: function (res) {
+                                if (res === "0") {
+                                    document.getElementById('default-page-options').style.display = 'none';
+                                    document.getElementById('loggedIn-page-options').style.display = 'block';
+                                    document.getElementById('logout-link').previousElementSibling.innerHTML = "Profile";
+                                    let url = new URL("http://localhost:3000/static/customer/Profile.html");
+                                    document.getElementById('logout-link').previousElementSibling.setAttribute("href", url);
+                                } else if (res === "1") {
+                                    document.getElementById('default-page-options').style.display = 'none';
+                                    document.getElementById('loggedIn-page-options').style.display = 'block';
+                                    document.getElementById('logout-link').previousElementSibling.innerHTML = "Admin Page";
+                                    let url = new URL("http://localhost:3000/static/admin/Admin.html");
+                                    document.getElementById('logout-link').previousElementSibling.setAttribute("href", url);
+                                }
+                            }
+                        });
+                    } else if (response === "0") {
+                        document.getElementById('default-page-options').style.display = 'block';
+                        document.getElementById('loggedIn-page-options').style.display = 'none';
+                    }
                 }
-                else if(response === "0"){
-                    document.getElementById('default-page-options').style.display = 'block';
-                    document.getElementById('loggedIn-page-options').style.display = 'none';
-                }
-            }
-        });
+            });
+        }
     }
 });
 
