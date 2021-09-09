@@ -4,77 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+    <title>Product</title>
+    <link rel="icon" href="/img/icon.jpg">
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/products.css?version=51">
+    <link rel="stylesheet" href="/css/products.css">
     <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <script type="text/javascript" src="/js/navigationBar.js"></script>
+    <script type="text/javascript" src="/js/products.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/js/navigationBar.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            para = new URLSearchParams(window.location.search);
-            productCategory = para.get("category");
-            productName = para.get("name");
-            link = "http://localhost:8080/products";
-            method = undefined;
-            body = {};
-            path = "Home &nbsp &#10095 &nbsp Products";
-            if(!productCategory && !productName){
-                method = "GET";
-            }
-            else if(productCategory && !productName){
-                link += "/search/category";
-                method = "POST";
-                body = {"category": productCategory};
-                path +=  " &nbsp &#10095 &nbsp" + productCategory;
-            }
-            else if(!productCategory && productName){
-                link += "/search/name";
-                method = "POST";
-                body = {"name": productName};
-                path +=  " &nbsp &#10095 &nbsp" + productName;
-            }
-
-            $.ajax({
-                url: link,
-                type: method,
-                data: body,
-                async: false,
-                crossDomain: true,
-                success: function (response) {
-                    document.getElementById("path").innerHTML = path;
-                    for (let i = 0; i < response.length; i++) {
-                        let div = document.createElement('div');
-                        let divTitle = document.createElement('div');
-                        let divPrice = document.createElement('div');
-                        let img = document.createElement('img');
-                        divTitle.className = "title";
-                        divPrice.className = "price";
-                        divTitle.innerHTML = response[i].title;
-                        divPrice.innerHTML = "$" + response[i].price;
-                        img.src = response[i].imgAddress;
-                        div.className = "product";
-                        div.appendChild(img);
-                        div.appendChild(divTitle);
-                        div.appendChild(divPrice);
-                        let url = new URL("http://localhost:3000/static/Product.html");
-                        url.searchParams.append("id", response[i].id);
-                        let value = "window.location=" + "'" + url + "'";
-                        div.setAttribute("onclick", value);
-                        document.getElementById("flex-container").appendChild(div);
-                    }
-                },
-                error: function (response) {
-                    alert(response.responseText);
-                }
-            });
-        });
-    </script>
 </head>
 
 <header>
     <div id="logo-place">
-        <a id="logo" href="/index.html">digital</a>
+        <a id="logo" href="/">digital</a>
     </div>
 
     <div>
@@ -83,29 +26,25 @@
                 class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
         <p id="loggedIn-page-options">
             <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
-                class="authorization" href="#">Logout</a></p>
-        <form action="" target="_self" method="post" class="forms">
-            <input type="text" id="search-field" name="searchedProduct" placeholder="Search all products...">
-            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit"/>
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+        <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+            <input type="text" id="search-field" name="name" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
         </form>
-        <form action="" target="_self" method="post" class="forms">
-            <input type="button" id="cart-field" value="Cart">
+        <form target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
         </form>
     </div>
 
     <div>
         <nav>
-            <ul class="navbar-lists">
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">cases</a></li>
-                <li><a href="#">video</a></li>
-                <li><a href="#">Accessories</a></li>
-                <li><a href="#">sport optic</a></li>
-                <li><a href="#">lifestyle</a></li>
+            <ul class="navbar-lists" id="navbar-lists">
+                <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
             </ul>
         </nav>
     </div>
 </header>
+
 
 <body>
 <div id="path">Home &nbsp &#10095 &nbsp Products</div>
