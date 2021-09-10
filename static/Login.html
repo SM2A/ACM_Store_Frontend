@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <link rel="icon" href="/img/icon.jpg">
+    <link rel="stylesheet" href="/css/styles.css?version=51">
+    <script type="text/javascript" src="/js/navigationBar.js?version=51"></script>
+    <script type="text/javascript">
+        if (((email === "") && (password !== ""))
+            || ((email !== "") && (password === ""))
+            || ((email === "") && (password === ""))) {
+            clearCookie();
+        } else {
+            $.ajax({
+                url: "http://localhost:8080/valid_login",
+                type: "POST",
+                data: {"email": email, "password": password},
+                success: function (response) {
+                    if (response == "1") {
+                        alert("Please logout first");
+                        window.location = "/";
+                    } else if (response == "0") {
+                        clearCookie();
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<header>
+    <div id="logo-place">
+        <a id="logo" href="/">digital</a>
+    </div>
+
+    <div>
+        <p id="default-page-options">
+            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+        <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+            <input type="text" id="search-field" name="name" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+        </form>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+        </form>
+    </div>
+
+    <div>
+        <nav>
+            <ul class="navbar-lists" id="navbar-lists">
+                <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+<div class="form-container">
+    <h2>LOGIN</h2>
+    <form action="http://localhost:8080/login" method="post" id="login-form">
+        <label>
+            <input name="email" type="email" placeholder="Email" required/>
+        </label><br/>
+        <label>
+            <input name="password" type="password" placeholder="Password" required/>
+        </label><br/>
+        <label id="frgt-psw">
+            <a href="/forget-password">Forget Your Password?</a>
+        </label><br/>
+        <button type="submit">SIGN IN</button>
+    </form><br/>
+    <label id="rtn-str">
+        <span>or </span><a href="/">Return to Store</a>
+    </label>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#login-form').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "http://localhost:8080/login",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function (response) {
+                    json = JSON.parse(response)
+                    setCooike("email", json.email)
+                    setCooike("password", json.password)
+                    window.location.href = "/";
+                },
+                error: function (response) {
+                    alert(response.responseText)
+                }
+            });
+        })
+    })
+</script>
+
+<style>
+
+    .form-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 20%;
+    }
+
+    .form-container h2 {
+        position: relative;
+        left: 38%;
+    }
+
+    .form-container input {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container input:valid {
+        background: #e6f0ff;
+    }
+
+    .form-container input:invalid {
+        background: #ffeded;
+    }
+
+    .form-container button {
+        position: relative;
+        left: 33%;
+        margin: 10px;
+        background: #4286db;
+        border-radius: 3px;
+        border: none;
+        width: 35%;
+        padding: 10px;
+        text-align: center;
+        font-size: 15px;
+        color: white;
+    }
+
+    .form-container button:hover {
+        background: #182e49;
+    }
+
+    #frgt-psw a {
+        position: relative;
+        left: 25%;
+        margin: 10px;
+        color: #4286db;
+        text-decoration: none;
+    }
+
+    #rtn-str {
+        position: relative;
+        left: 30%;
+        margin: 10px;
+    }
+
+    #rtn-str a {
+        color: #4286db;
+        text-decoration: none;
+    }
+
+    #rtn-str span {
+        color: #4a4a4a;
+    }
+
+</style>

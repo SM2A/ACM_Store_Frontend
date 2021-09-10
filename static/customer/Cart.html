@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <link rel="icon" href="/img/icon.jpg">
+    <link rel="stylesheet" href="/css/styles.css?version=51">
+    <script type="text/javascript" src="/js/navigationBar.js?version=51"></script>
+    <script type="text/javascript">
+        if (((email === "") && (password !== ""))
+            || ((email !== "") && (password === ""))
+            || ((email === "") && (password === ""))) {
+            clearCookie();
+            alert("Please login first");
+            window.location = "/static/Login.html";
+        } else {
+            $.ajax({
+                url: "http://localhost:8080/valid_login",
+                type: "POST",
+                data: {"email": email, "password": password},
+                success: function (response) {
+                    if (response == "0") {
+                        alert("Please login first");
+                        window.location = "/static/Login.html";
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<header>
+    <div id="logo-place">
+        <a id="logo" href="/">digital</a>
+    </div>
+
+    <div>
+        <p id="default-page-options">
+            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+        <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+            <input type="text" id="search-field" name="name" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+        </form>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+        </form>
+    </div>
+
+    <div>
+        <nav>
+            <ul class="navbar-lists" id="navbar-lists">
+                <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+<table id="items" class="center">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+</table>
+<button id="purchase-btn" type="button" onclick="purchase()">Purchase</button>
+</body>
+</html>
+
+<script type="text/javascript">
+    para = new URLSearchParams(window.location.search);
+    id = para.get("id");
+    if (!id) {
+        $.ajax({
+            url: "http://localhost:8080/carts",
+            type: "POST",
+            data: {"email": email, "password": password},
+            success: function (carts) {
+                openCart = JSON.parse(carts)
+                for (let j = 0; j < openCart.length; j++) {
+                    if (openCart[j].status == "OPEN") {
+
+                        if (openCart[j].total == 0) {
+                            document.getElementById("purchase-btn").style.display = "none";
+                        }
+
+                        get_url = "http://localhost:8080/carts/" + openCart[j].id;
+                        $.ajax({
+                            url: get_url,
+                            type: "GET",
+                            success: function (response) {
+                                table = document.getElementById('items')
+                                items = JSON.parse(response)
+                                for (let i = 0; i < items.length; i++) {
+                                    row = table.insertRow()
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = items[i].id
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = items[i].title
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = items[i].category
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = items[i].price
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = items[i].quantity
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = items[i].total
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = "➕"
+                                    cell.setAttribute("class", "btn-op")
+                                    cell.addEventListener('click', function () {
+                                        addItem(items[i].id);
+                                    });
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = "➖"
+                                    cell.setAttribute("class", "btn-op")
+                                    cell.addEventListener('click', function () {
+                                        removeItem(items[i].id);
+                                    });
+
+                                    cell = row.insertCell()
+                                    cell.innerHTML = "🗑"
+                                    cell.setAttribute("class", "btn-op")
+                                    cell.addEventListener('click', function () {
+                                        deleteItem(items[i].id);
+                                    });
+                                }
+                                row = table.insertRow()
+                                cell = row.insertCell()
+                                cell.setAttribute("colspan", "5")
+                                cell = row.insertCell()
+                                cell.innerHTML = openCart[j].total
+                            },
+                            error: function (response) {
+                                alert(response.responseText)
+                            }
+                        });
+                    }
+                }
+            },
+            error: function (response) {
+                alert(response.responseText)
+            }
+        });
+    } else {
+        if (haveAccess(id)) {
+            document.getElementById("purchase-btn").style.display = "none";
+            get_url = "http://localhost:8080/carts/" + id;
+            $.ajax({
+                url: get_url,
+                type: "GET",
+                success: function (response) {
+                    table = document.getElementById('items')
+                    items = JSON.parse(response)
+                    for (let i = 0; i < items.length; i++) {
+                        row = table.insertRow()
+
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].id
+
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].title
+
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].category
+
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].price
+
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].quantity
+
+                        cell = row.insertCell()
+                        cell.innerHTML = items[i].total
+                    }
+                },
+                error: function (response) {
+                    alert(response.responseText)
+                }
+            });
+        } else {
+            alert("You don't have permission");
+            window.location = "/static/customer/Cart.html";
+        }
+    }
+</script>
+
+<style>
+
+    th, td {
+        border-style: groove;
+        border-color: lightskyblue;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    table.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    th {
+        background: #1664bf;
+        color: white;
+    }
+
+    tr:hover {
+        background: #ffadad;
+    }
+
+    button {
+        margin: 10px;
+        background: #4286db;
+        border-radius: 3px;
+        border: none;
+        padding: 10px;
+        text-align: center;
+        font-size: 15px;
+        color: white;
+        display: table;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    button:hover {
+        background: #182e49;
+    }
+
+    .btn-op {
+        cursor: pointer;
+    }
+
+</style>

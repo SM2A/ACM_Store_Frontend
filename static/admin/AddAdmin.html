@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <link rel="icon" href="/img/icon.jpg">
+    <link rel="stylesheet" href="/css/styles.css?version=51">
+    <script type="text/javascript" src="/js/navigationBar.js?version=51"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <script type="text/javascript" src="/js/admin.js"></script>
+    <title>Add Admin</title>
+</head>
+<header>
+    <div id="logo-place">
+        <a id="logo" href="/">digital</a>
+    </div>
+
+    <div>
+        <p id="default-page-options">
+            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+        <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+            <input type="text" id="search-field" name="name" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+        </form>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+        </form>
+    </div>
+
+    <div>
+        <nav>
+            <ul class="navbar-lists" id="navbar-lists">
+                <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+<div class="form-container">
+    <h2>Add Admin</h2>
+    <form action="http://localhost:8080/admin/add" method="post" id="addAdmin-form">
+        <label>
+            <input name="firstName" type="text" placeholder="First Name" required/>
+        </label><br/>
+        <label>
+            <input name="lastName" type="text" placeholder="Last Name" required/>
+        </label><br/>
+        <label>
+            <input name="password" type="password" placeholder="Password" required/>
+        </label><br/>
+        <label>
+            <input name="email" type="email" placeholder="Email" required/>
+        </label><br/>
+        <label>
+            <input name="phoneNumber" type="tel" placeholder="Phone Number" required/>
+        </label><br/>
+        <label>
+            <input name="address" type="text" placeholder="Address" required/>
+        </label><br/>
+        <button type="submit">CREATE</button>
+    </form>
+    <br/>
+    <label id="rtn-str">
+        <span>or </span><a href="/static/admin/Admin.html">Return to Admin Page</a>
+    </label>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#addAdmin-form').submit(function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "http://localhost:8080/admin/add",
+                type: "POST",
+                data: $(this).serialize(),
+                success: function (response) {
+                    alert("Added successfully")
+                    window.location = "/static/admin/AddAdmin.html";
+                },
+                error: function (response) {
+                    alert(response.responseText)
+                }
+            });
+        });
+    });
+
+</script>
+
+<style>
+
+    .form-container {
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 20%;
+    }
+
+    .form-container h2 {
+        position: relative;
+        left: 32%;
+    }
+
+    .form-container input {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container input:valid {
+        background: #e6f0ff;
+    }
+
+    .form-container input:invalid {
+        background: #ffeded;
+    }
+
+    .form-container button {
+        position: relative;
+        left: 33%;
+        margin: 10px;
+        background: #4286db;
+        border-radius: 3px;
+        border: none;
+        width: 35%;
+        padding: 10px;
+        text-align: center;
+        font-size: 15px;
+        color: white;
+    }
+
+    .form-container button:hover {
+        background: #182e49;
+    }
+
+    #rtn-str {
+        position: relative;
+        left: 23%;
+        margin: 10px;
+    }
+
+    #rtn-str a {
+        color: #4286db;
+        text-decoration: none;
+    }
+
+    #rtn-str span {
+        color: #4a4a4a;
+    }
+
+</style>

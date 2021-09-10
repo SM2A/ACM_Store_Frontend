@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <link rel="icon" href="/img/icon.jpg">
+    <link rel="stylesheet" href="/css/styles.css?version=51">
+    <script type="text/javascript" src="/js/navigationBar.js?version=51"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <script type="text/javascript" src="/js/admin.js"></script>
+    <title>Add Product</title>
+</head>
+<header>
+    <div id="logo-place">
+        <a id="logo" href="/">digital</a>
+    </div>
+
+    <div>
+        <p id="default-page-options">
+            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+        <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+            <input type="text" id="search-field" name="name" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+        </form>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+        </form>
+    </div>
+
+    <div>
+        <nav>
+            <ul class="navbar-lists" id="navbar-lists">
+                <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+<div class="form-container">
+    <h2>Add Product</h2>
+    <form action="http://localhost:8080/products/add" method="post" id="product-form">
+        <label>
+            <input name="title" type="text" placeholder="Title" required/>
+        </label><br/>
+        <label>
+            <input name="price" type="number" min="0" step="1" placeholder="Price" required/>
+        </label><br/>
+        <label>
+            <input name="quantityAvailable" type="number" min="0" step="1" placeholder="Quantity" required/>
+        </label><br/>
+        <label>
+            <select name="category" id="category_">
+                <option disabled hidden selected>Category</option>
+            </select>
+        </label><br/>
+        <label>
+            <input name="imgAddress" type="text" placeholder="Image Address" required/>
+        </label><br/>
+        <label>
+            <textarea name="description" placeholder="Description" rows="8" required></textarea>
+        </label><br/>
+        <button type="submit">Add</button>
+    </form>
+    <br/>
+    <label id="rtn-str">
+        <span>or </span><a href="/static/admin/Admin.html">Return to Admin Page</a>
+    </label>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    $.ajax({
+        url: "http://localhost:8080/products/category",
+        type: "GET",
+        success: function (response) {
+            select = document.getElementById('category_')
+            for (let i = 0; i < response.length; i++) {
+                select.appendChild(new Option(response[i], response[i]))
+            }
+        },
+        error: function (response) {
+            alert(response.responseText)
+        }
+    });
+
+    $(document).ready(function () {
+        $('#product-form').submit(function (event) {
+            event.preventDefault();
+            if (document.getElementById('category_').value) {
+                $.ajax({
+                    url: "http://localhost:8080/products/add",
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function (response) {
+                        alert("Added successfully")
+                        window.location = "/static/admin/AddProduct.html";
+                    },
+                    error: function (response) {
+                        alert(response.responseText)
+                    }
+                });
+            } else {
+                alert("Please select category")
+            }
+        });
+    });
+
+</script>
+
+<style>
+
+    .form-container {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        width: 20%;
+    }
+
+    .form-container h2 {
+        position: relative;
+        left: 27%;
+    }
+
+    .form-container input {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container input:valid {
+        background: #e6f0ff;
+    }
+
+    .form-container input:invalid {
+        background: #ffeded;
+    }
+
+    .form-container select {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container select:valid {
+        background: #e6f0ff;
+    }
+
+    .form-container select:invalid {
+        background: #ffeded;
+    }
+
+    .form-container textarea {
+        border: none;
+        margin: 7px;
+        padding: 10px;
+        background: #eeeeee;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-container textarea:valid {
+        background: #e6f0ff;
+    }
+
+    .form-container textarea:invalid {
+        background: #ffeded;
+    }
+
+    .form-container button {
+        position: relative;
+        left: 33%;
+        margin: 10px;
+        background: #4286db;
+        border-radius: 3px;
+        border: none;
+        width: 35%;
+        padding: 10px;
+        text-align: center;
+        font-size: 15px;
+        color: white;
+    }
+
+    .form-container button:hover {
+        background: #182e49;
+    }
+
+    #rtn-str {
+        position: relative;
+        left: 23%;
+        margin: 10px;
+    }
+
+    #rtn-str a {
+        color: #4286db;
+        text-decoration: none;
+    }
+
+    #rtn-str span {
+        color: #4a4a4a;
+    }
+
+</style>

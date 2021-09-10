@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <link rel="icon" href="/img/icon.jpg">
+    <link rel="stylesheet" href="/css/styles.css?version=51">
+    <script type="text/javascript" src="/js/navigationBar.js?version=51"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <script type="text/javascript" src="/js/admin.js"></script>
+    <title>Admin</title>
+</head>
+<header>
+    <div id="logo-place">
+        <a id="logo" href="/">digital</a>
+    </div>
+
+    <div>
+        <p id="default-page-options">
+            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+        <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+            <input type="text" id="search-field" name="name" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+        </form>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+        </form>
+    </div>
+
+    <div>
+        <nav>
+            <ul class="navbar-lists" id="navbar-lists">
+                <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+<button type="button" onclick="location.href='/static/admin/AddCategory.html'">Add Category</button>
+<button type="button" onclick="location.href='/static/admin/addProduct.html'">Add Product</button>
+<button type="button" onclick="location.href='/static/admin/AddAdmin.html'">Add Admin</button>
+<button type="button" onclick="location.href='/static/admin/Products.html'">Products</button>
+<button type="button" onclick="location.href='/static/admin/Users.html'">Users</button>
+<button type="button" onclick="location.href='/static/admin/Carts.html'">Carts</button>
+</body>
+</html>
+
+<style>
+
+    button {
+        margin: 10px;
+        background: #4286db;
+        border-radius: 3px;
+        border: none;
+        padding: 10px;
+        text-align: center;
+        font-size: 15px;
+        color: white;
+        display: table;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    button:hover {
+        background: #182e49;
+    }
+
+</style>

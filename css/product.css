@@ -1,0 +1,167 @@
+body {
+    background: white;
+    margin: 0;
+    font-family: 'Poppins';
+    padding-bottom: 10em;
+}
+
+.checked {
+    color: orange;
+}
+
+.product{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.product #image {
+    float: left;
+    margin: 2em 4em 2em 18em;
+}
+
+.product .right-col {
+    margin-top: 6em;
+}
+
+.product .right-col h2 {
+    display: inline;
+}
+
+#add-to-cart{
+    position: absolute;
+    background-color: white;
+    background-image: url('../img/cart.png');
+    border: 3px solid #55bad3;
+    color: #55bad3;
+    margin-top: 3em;
+    padding: 1em 1.5em;
+    /*padding: 15px 32px;*/
+    text-align: left;
+    text-indent: 2.5em;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background-position: 13%;
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-origin: border-box;
+}
+
+#increase, #decrease{
+    /*position: absolute;*/
+    background-color: white;
+    border: 3px solid #55bad3;
+    color: #55bad3;
+    margin-top: 1.9em;
+    width: 1.5em;
+    height: 1.5em;
+    /*padding: 1em 1.5em;*/
+    text-align: center;
+    text-decoration: none;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.product .right-col #buy {
+    position: absolute;
+    background-color: #55bad3;
+    border: none;
+    color: white;
+    margin-top: 6em;
+    padding: 19px 62px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.product .right-col hr {
+    margin-top: 2em;
+    margin-right: 18em;
+    color: #c5c5c5;
+    opacity: 50%;
+}
+
+.product .right-col .description {
+    margin-top: 2em;
+    margin-right: 18em;
+    margin-left: 43em;
+}
+
+.product .reviews hr {
+    color: #c5c5c5;
+    margin: 3em 18em 3em 18em;
+    opacity: 50%;
+}
+
+.product .reviews h2 {
+    margin-left: 12em;
+}
+
+.product .reviews #write-review {
+    margin-left: 17.5em;
+    margin-top: 2em;
+    margin-bottom: 4em;
+    text-align: left;
+    width: 20%;
+    float: left;
+}
+
+.product .reviews #write-review th, .product .reviews #write-review td {
+    border: 1px solid #c5c5c5;
+    border-collapse: collapse;
+    padding: 15px;
+}
+
+.product .reviews #write-review a {
+    text-decoration: none;
+    color: #55bad3;
+}
+
+.product .reviews #comments {
+    margin-top: 2em;
+    margin-left: 45.5em;
+    margin-right: 12em;
+    width: 35em;
+}
+
+#comments td img:hover{
+    cursor: pointer;
+}
+
+.product .reviews #comments th, .product .reviews #comments td {
+    border: none;
+    padding: 20px;
+    /*font-weight: bold;*/
+    font-size: 17px;
+}
+
+#write-review-btn {
+    /*position: absolute;*/
+    background-color: #55bad3;
+    border: none;
+    color: white;
+    margin-top: 3%;
+    padding: 3% 5%;
+    /*margin-top: 6em;*/
+    /*padding: 19px 62px;*/
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#message, #rating-val{
+    border: 1px solid #c5c5c5;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+
+
+
+
+

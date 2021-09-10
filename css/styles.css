@@ -1,0 +1,166 @@
+/* navigation bar style*/
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Montserrat:wght@600&family=Rubik&family=Squada+One&display=swap&family=Montserrat:wght@800&display=swap"');
+
+body {
+    background: #fdfdfe;
+    margin: 0;
+}
+
+header {
+    background: #182e49;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+#logo-place {
+    padding-top: 4.5%;
+}
+
+#logo {
+    font-size: 250%;
+    font-weight: bold;
+    font-family: "Squada One", sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #f2f2f2;
+}
+
+#default-page-options {
+    padding: 0;
+    float: right;
+    margin-top: -5%;
+    font-size: 80%;
+    font-family: 'Manrope', sans-serif;
+    word-spacing: 0.05em;
+    color: #f2f2f2;
+}
+
+#header-login {
+    padding: 0;
+    float: right;
+    margin-top: -5%;
+    font-size: 80%;
+    font-family: 'Manrope', sans-serif;
+    word-spacing: 0.05em;
+    color: #f2f2f2;
+}
+
+#loggedIn-page-options {
+    padding: 0;
+    float: right;
+    margin-top: -5%;
+    font-size: 80%;
+    font-family: 'Manrope', sans-serif;
+    word-spacing: 0.05em;
+    color: #f2f2f2;
+}
+
+.authorization {
+    font-weight: bolder;
+    text-decoration: none;
+    color: #f2f2f2;
+    cursor: pointer;
+}
+
+.authorization:hover {
+    color: rgb(219, 214, 214);
+}
+
+#logout-link {
+    cursor: pointer;
+}
+
+form {
+    display: inline;
+}
+
+#search-field {
+    position: absolute;
+    top: 11%;
+    left: 55.7%;
+    background-color: #0f243d;
+    width: 23%;
+    height: 3em;
+    border: 0;
+    text-align: left;
+    text-decoration: none;
+    padding-left: 1%;
+    padding-right: 0;
+    font-size: 14px;
+    font-family: 'Manrope', sans-serif;
+    transition: 0.6s;
+    caret-color: white;
+    color: #f2f2f2;
+}
+
+#search-field:focus {
+    outline: none;
+}
+
+#search-field:hover {
+    background: #0a1829;
+    transition: 0.6s;
+}
+
+#glass-pic {
+    position: absolute;
+    top: 12.3%;
+    left: 76.5%;
+    padding: 0;
+    width: 2em;
+}
+
+#cart-field {
+    position: absolute;
+    top: 11%;
+    left: 81.5%;
+    width: 9.2%;
+    height: 3.2em;
+    border: 0;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 88%;
+    font-family: 'Montserrat', sans-serif;
+    padding-left: 3%;
+    background-color: #0f243d;
+    background-image: url('../img/cart-icon.png');
+    background-position: 20%;
+    background-repeat: no-repeat;
+    background-size: 2em;
+    background-origin: border-box;
+    cursor: pointer;
+    transition: 0.6s;
+    color: #f2f2f2;
+}
+
+#cart-field:hover {
+    background-color: #0a1829;
+    transition: 0.6s;
+}
+
+nav {
+    background: #182e49;
+    margin-top: 7%;
+}
+
+.navbar-lists {
+    padding-left: 0;
+    padding-bottom: 1.5%;
+    margin: 0;
+    list-style: none;
+    text-transform: uppercase;
+    font-size: 80%;
+    color: #f2f2f2;
+}
+
+nav ul li a {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    color: #f2f2f2;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 2.7%;
+}

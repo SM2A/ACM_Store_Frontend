@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/cookie.js"></script>
+    <link rel="icon" href="/img/icon.jpg">
+    <link rel="stylesheet" href="/css/styles.css?version=51">
+    <script type="text/javascript" src="/js/navigationBar.js?version=51"></script>
+    <script type="text/javascript" src="/js/cart.js"></script>
+    <script type="text/javascript" src="/js/admin.js"></script>
+    <title>Products</title>
+</head>
+<header>
+    <div id="logo-place">
+        <a id="logo" href="/">digital</a>
+    </div>
+
+    <div>
+        <p id="default-page-options">
+            <a class="authorization" href="/static/Login.html">Sign in</a>&nbsp or &nbsp<a
+                class="authorization" href="/static/customer/Signup.html">Create an Account</a></p>
+        <p id="loggedIn-page-options">
+            <a class="authorization" href="/static/customer/Profile.html">Profile</a>&nbsp or &nbsp<a
+                class="authorization" id="logout-link" onclick="logout()">Logout</a></p>
+        <form action="/static/Products.html" target="_self" method="GET" class="forms" name="name">
+            <input type="text" id="search-field" name="name" placeholder="Search all products...">
+            <input type="image" id="glass-pic" src="/img/magnifying-glass.png" alt="Submit" value="submit"/>
+        </form>
+        <form action="" target="_self" method="post" class="forms">
+            <input type="button" id="cart-field" value="Cart" onclick="goToCart()">
+        </form>
+    </div>
+
+    <div>
+        <nav>
+            <ul class="navbar-lists" id="navbar-lists">
+                <li><a href="http://localhost:3000/static/Products.html">ALL PRODUCTS</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<body>
+<table id="products" class="center">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Quantity</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Rating</th>
+        <th>Description</th>
+        <th>Image</th>
+    </tr>
+</table>
+</body>
+</html>
+
+<script type="text/javascript">
+    $.ajax({
+        url: "http://localhost:8080/products",
+        type: "GET",
+        success: function (response) {
+            table = document.getElementById('products');
+            for (let i = 0; i < response.length; i++) {
+                row = table.insertRow();
+                para = new URLSearchParams();
+                para.append("id", response[i].id);
+                link = "http://localhost:3000/static/admin/EditProduct.html?" + para.toString();
+                attribute = "window.location=" + "'" + link + "'";
+                row.setAttribute("onclick", attribute);
+
+                cell = row.insertCell();
+                cell.innerHTML = response[i].id;
+
+                cell = row.insertCell();
+                cell.innerHTML = response[i].title;
+
+                cell = row.insertCell();
+                cell.innerHTML = response[i].quantityAvailable;
+
+                cell = row.insertCell();
+                cell.innerHTML = response[i].category;
+
+                cell = row.insertCell();
+                cell.innerHTML = response[i].price;
+
+                cell = row.insertCell();
+                cell.innerHTML = response[i].rating;
+
+                cell = row.insertCell();
+                cell.innerHTML = response[i].description;
+
+                cell = row.insertCell();
+                img = document.createElement("img");
+                img.src = response[i].imgAddress;
+                cell.appendChild(img);
+            }
+        },
+        error: function (response) {
+            alert(response.responseText)
+        }
+    });
+</script>
+
+<style>
+
+    th, td {
+        border-style: groove;
+        border-color: lightskyblue;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+    td {
+        text-align: center;
+        height: 100px;
+    }
+
+    tr {
+        cursor: pointer;
+    }
+
+    table.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    th {
+        background: #1664bf;
+        color: white;
+    }
+
+    tr:hover {
+        background: #ffadad;
+    }
+
+    img{
+        width: 100%;
+        height: 100%;
+    }
+
+</style>
