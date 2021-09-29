@@ -68,9 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
             for(let i = 0 ; i < response.length && i < 6 ; i++){
                 let li = document.createElement('li');
                 let a = document.createElement('a');
-                a.innerHTML = response[i];
+                a.innerHTML = response[i].name;
                 let url = new URL("http://localhost:3000/static/Products.html");
-                url.searchParams.append("category", response[i]);
+                url.searchParams.append("category", response[i].name);
                 a.setAttribute("href", url);
                 li.appendChild(a);
                 document.getElementById("navbar-lists").appendChild(li);
