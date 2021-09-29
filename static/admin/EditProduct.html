@@ -93,8 +93,8 @@
                 success: function (response) {
                     select = document.getElementById('category_')
                     for (let i = 0; i < response.length; i++) {
-                        option = new Option(response[i], response[i])
-                        if (response[i] == product.category) {
+                        option = new Option(response[i].name, response[i].name)
+                        if (response[i].name == product.category) {
                             option.setAttribute("selected", "")
                         }
                         select.appendChild(option)
