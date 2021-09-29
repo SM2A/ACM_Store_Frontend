@@ -82,7 +82,7 @@
         success: function (response) {
             select = document.getElementById('category_')
             for (let i = 0; i < response.length; i++) {
-                select.appendChild(new Option(response[i], response[i]))
+                select.appendChild(new Option(response[i].name, response[i].name))
             }
         },
         error: function (response) {
